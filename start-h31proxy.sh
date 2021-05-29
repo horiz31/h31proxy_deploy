@@ -20,4 +20,4 @@ function ifup {
     fi
 }
 
-dotnet ${LOCAL}/src/h31proxy/h31proxy.net.dll ${CONFIG_DIR}/h31proxy.conf ${CONFIG_DIR}/video.conf
+/usr/local/bin/dotnet/dotnet ${LOCAL}/src/h31proxy/h31proxy.net.dll ${CONFIG_DIR}/h31proxy.conf ${CONFIG_DIR}/video.conf

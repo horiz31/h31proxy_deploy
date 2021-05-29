@@ -29,8 +29,8 @@ default:
 	@echo ""
 
 $(SYSCFG)/h31proxy.conf:
-	@echo ""	
-	@SERIAL=$(SERIAL) ./provision.sh $@
+	@echo "Starting config wizard:"	
+	@./provision.sh $@
 
 clean:
 	@if [ -d src ] ; then cd src && make clean ; fi
