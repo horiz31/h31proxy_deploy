@@ -1,16 +1,17 @@
 [Unit]
-Description=Video Service
+Description=H31Proxy
 After=network.target
 RequiresMountsFor=/etc /usr
 
 [Service]
-ExecStart=/usr/bin/start-video.sh
-EnvironmentFile=/etc/systemd/video.conf
-WorkingDirectory=/home/pi
+ExecStart=/usr/bin/start-h31proxy.sh
+EnvironmentFile=/etc/systemd/h31proxy.conf
+RuntimeDirectory=h31proxy
+RuntimeDirectoryMode=0755
 StandardOutput=journal
 StandardError=journal
 Restart=always
-User=pi
+RestartSec=5
 
 [Install]
 WantedBy=multi-user.target

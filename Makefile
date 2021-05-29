@@ -7,11 +7,11 @@ SUDO := $(shell test $${EUID} -ne 0 && echo "sudo")
 
 SERIAL ?= $(shell python3 serial_number.py)
 LOCAL=/usr/local
-LOCAL_SCRIPTS=start-video.sh serial_number.py
+LOCAL_SCRIPTS=start-h31proxy.sh
 CONFIG ?= /var/local
 LIBSYSTEMD=/lib/systemd/system
-PKGDEPS ?= v4l-utils build-essential
-SERVICES=video.service
+PKGDEPS ?= 
+SERVICES=h31proxy.service
 SYSCFG=/etc/systemd
 DRY_RUN=false
 PLATFORM ?= $(shell python serial_number.py | cut -c1-4)
@@ -28,7 +28,7 @@ default:
 	@echo "The above are issued in the order shown above.  dependencies is only done once."
 	@echo ""
 
-$(SYSCFG)/video.conf:
+$(SYSCFG)/h31proxy.conf:
 	@echo ""	
 	@SERIAL=$(SERIAL) ./provision.sh $@
 
@@ -48,24 +48,24 @@ enable:
 	@( for s in $(SERVICES) ; do $(SUDO) systemctl enable $${s%.*} ; done ; true )
 
 install: dependencies
+	@./ensure-dotnet.sh	
+	@[ -d $(LOCAL)/src/h31proxy ] || mkdir $(LOCAL)/src/h31proxy
+	@$(SUDO) cp -a bin/. $(LOCAL)/src/h31proxy/
 	@for s in $(LOCAL_SCRIPTS) ; do $(SUDO) install -Dm755 $${s} $(LOCAL)/bin/$${s} ; done
-	@./ensure-elp-driver.sh		
-	@PLATFORM=$(PLATFORM) ./ensure-gst.sh $(DRY_RUN)
-	@PLATFORM=$(PLATFORM) ./ensure-gstd.sh $(DRY_RUN)	
-	@$(MAKE) --no-print-directory -B $(SYSCFG)/video.conf
+	@$(MAKE) --no-print-directory -B $(SYSCFG)/h31proxy.conf
 	@$(MAKE) --no-print-directory enable
 
 provision:
-	@$(MAKE) --no-print-directory -B $(SYSCFG)/video.conf
-	$(SUDO) systemctl restart video
+	@$(MAKE) --no-print-directory -B $(SYSCFG)/h31proxy.conf
+	$(SUDO) systemctl restart h31proxy
 
 see:
-	$(SUDO) cat $(SYSCFG)/video.conf
+	$(SUDO) cat $(SYSCFG)/h31proxy.conf
 
 uninstall:
 	@$(MAKE) --no-print-directory disable
 	@( for s in $(SERVICES) ; do $(SUDO) rm $(LIBSYSTEMD)/$${s%.*}.service ; done ; true )
 	@if [ ! -z "$(SERVICES)" ] ; then $(SUDO) systemctl daemon-reload ; fi
-	$(SUDO) rm -f $(SYSCFG)/video.conf
+	$(SUDO) rm -f $(SYSCFG)/h31proxy.conf
 
 

@@ -4,6 +4,7 @@ SUDO=$(test ${EUID} -ne 0 && which sudo)
 SYSCFG=/etc/systemd
 UDEV_RULESD=/etc/udev/rules.d
 
+# expect to pass the path to the config file
 CONF=$1
 shift
 DEFAULTS=false
@@ -48,32 +49,43 @@ function contains {
 }
 
 case "$(basename $CONF)" in
-	video.conf)	
-		SOURCE=$(value_of SOURCE MIPI)	
-		FPS=$(value_of FPS 15)
-		HEIGHT=$(value_of HEIGHT 720)
-		WIDTH=$(value_of WIDTH 1280)
-		BITRATE=$(value_of BITRATE 2000000)
-		HOST=$(value_of HOST 192.168.1.29)
-		PORT=$(value_of PORT 5600)
+	h31proxy.conf)	
+		LOS_HOST=$(value_of LOS_HOST 224.10.10.10)	
+		LOS_PORT=$(value_of LOS_PORT 14550)
+		LOS_IFACE=$(value_of LOS_IFACE eth0)
+		BACKUP_HOST=$(value_of BACKUP_HOST 225.10.10.10)
+		BACKUP_PORT=$(value_of BACKUP_PORT 14560)
+		BACKUP_IFACE=$(value_of BACKUP_IFACE edge0)
+		FMU_SERIAL=$(value_of FMU_SERIAL /dev/ttyTHS1)
+		FMU_BAUDRATE=$(value_of FMU_BAUDRATE 500000)
+		ATAK_HOST=$(value_of ATAK_HOST 239.2.3.1)
+		ATAK_PORT=$(value_of ATAK_PORT 6969)
+		MY_SYSID=$(value_of MY_SYSID 1)
 		if ! $DEFAULTS ; then
-			SOURCE=$(interactive "$SOURCE" "Source, either MIPI or USB endpoint, e.g. /dev/video1")	
-			FPS=$(interactive "$FPS" "FPS, frames per second")	
-			HEIGHT=$(interactive "$HEIGHT" "HEIGHT, video height in pixels")	
-			WIDTH=$(interactive "$WIDTH" "WIDTH, video width in pixels")	
-			BITRATE=$(interactive "$BITRATE" "BITRATE, video bitrate in bits per second")	
-			HOST=$(interactive "$HOST" "HOST, UDP IPv4 for where to send the video")	
-			PORT=$(interactive "$PORT" "PORT, UDP port for where to send the video")	
-			
+			FMU_SERIAL=$(interactive "$FMU_SERIAL" "FMU_SERIAL, serial port connected to the FMU (e.g. /dev/ttyTHS1)")	
+			FMU_BAUDRATE=$(interactive "$FMU_BAUDRATE" "FMU_BAUDRATE, Baud rate for comms from the FMU")	
+			MY_SYSID=$(interactive "$MY_SYSID" "MY_SYSID, System ID of the FMU")			
+			LOS_HOST=$(interactive "$LOS_HOST" "LOS_HOST, Primary host IP address")	
+			LOS_PORT=$(interactive "$LOS_PORT" "LOS_PORT, Primary host port")	
+			LOS_IFACE=$(interactive "$LOS_IFACE" "LOS_IFACE, Interface to use for the primary comms")	
+			BACKUP_HOST=$(interactive "$BACKUP_HOST" "BACKUP_HOST, Secondary host IP address")	
+			BACKUP_PORT=$(interactive "$BACKUP_PORT" "BACKUP_PORT, Secondary host port")	
+			BACKUP_IFACE=$(interactive "$BACKUP_IFACE" "BACKUP_IFACE, Interface to use for the secondary comms")				
+			ATAK_HOST=$(interactive "$ATAK_HOST" "ATAK_HOST, Multicast address for ATAK CoT messages")	
+			ATAK_PORT=$(interactive "$ATAK_PORT" "ATAK_PORT, Port for where to send the ATAK CoT messages")					
 		fi	
 		echo "[Service]" > /tmp/$$.env && \
-		echo "SOURCE=${SOURCE}" >> /tmp/$$.env && \
-		echo "FPS=${FPS}" >> /tmp/$$.env && \
-		echo "HEIGHT=${HEIGHT}" >> /tmp/$$.env && \
-		echo "WIDTH=${WIDTH}" >> /tmp/$$.env && \
-		echo "BITRATE=${BITRATE}" >> /tmp/$$.env && \
-		echo "HOST=${HOST}" >> /tmp/$$.env && \
-		echo "PORT=${PORT}" >> /tmp/$$.env		
+		echo "FMU_SERIAL=${FMU_SERIAL}" >> /tmp/$$.env && \
+		echo "FMU_BAUDRATE=${FMU_BAUDRATE}" >> /tmp/$$.env && \
+		echo "MY_SYSID=${MY_SYSID}" >> /tmp/$$.env && \
+		echo "LOS_HOST=${LOS_HOST}" >> /tmp/$$.env && \
+		echo "LOS_PORT=${LOS_PORT}" >> /tmp/$$.env && \
+		echo "LOS_IFACE=${LOS_IFACE}" >> /tmp/$$.env && \
+		echo "BACKUP_HOST=${BACKUP_HOST}" >> /tmp/$$.env && \
+		echo "BACKUP_PORT=${BACKUP_PORT}" >> /tmp/$$.env && \
+		echo "BACKUP_IFACE=${BACKUP_IFACE}" >> /tmp/$$.env && \
+		echo "ATAK_HOST=${ATAK_HOST}" >> /tmp/$$.env && \
+		echo "ATAK_PORT=${ATAK_PORT}" >> /tmp/$$.env		
 		;;
 
 	
