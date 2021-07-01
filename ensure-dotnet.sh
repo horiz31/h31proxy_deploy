@@ -6,7 +6,7 @@
 
 DRY_RUN=false
 LOCAL=/usr/local
-DOTNET_5_DOWNLOAD=https://download.visualstudio.microsoft.com/download/pr/d0a22fa3-b916-49ce-8284-97131b424cb3/cb884163ad34b83f1ae1dbd33e09d77a/aspnetcore-runtime-5.0.7-linux-arm64.tar.gz
+DOTNET_DOWNLOAD=https://download.visualstudio.microsoft.com/download/pr/d0a22fa3-b916-49ce-8284-97131b424cb3/cb884163ad34b83f1ae1dbd33e09d77a/aspnetcore-runtime-5.0.7-linux-arm64.tar.gz
 DOTNET_RUNTIME=${LOCAL}/bin/dotnet/shared
 DOTNET_INSTALL=${LOCAL}/bin/dotnet
 H31=https://github.com/horiz31
