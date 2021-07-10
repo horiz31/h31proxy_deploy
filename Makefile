@@ -29,8 +29,11 @@ default:
 	@echo ""
 
 $(SYSCFG)/h31proxy.conf:
-	@echo "Starting config wizard:"	
-	@./provision.sh $@
+	@echo "Starting config wizard for h31proxy:"	
+	@./provision_h31.sh $@
+
+$(SYSCFG)/mavnet.conf:	
+	@./provision_mavnet.sh $@
 
 clean:
 	@if [ -d src ] ; then cd src && make clean ; fi
@@ -47,20 +50,23 @@ enable:
 	@if [ ! -z "$(SERVICES)" ] ; then $(SUDO) systemctl daemon-reload ; fi
 	@( for s in $(SERVICES) ; do $(SUDO) systemctl enable $${s%.*} ; done ; true )
 
-install: dependencies
-	@./ensure-dotnet.sh	
+install: dependencies	
 	@[ -d $(LOCAL)/src/h31proxy ] || mkdir $(LOCAL)/src/h31proxy
 	@$(SUDO) cp -a bin/. $(LOCAL)/src/h31proxy/
+	@$(SUDO) chmod +x $(LOCAL)/src/h31proxy/h31proxy.net
 	@for s in $(LOCAL_SCRIPTS) ; do $(SUDO) install -Dm755 $${s} $(LOCAL)/bin/$${s} ; done
 	@$(MAKE) --no-print-directory -B $(SYSCFG)/h31proxy.conf
+	@$(MAKE) --no-print-directory -B $(SYSCFG)/mavnet.conf
 	@$(MAKE) --no-print-directory enable
 
 provision:
 	@$(MAKE) --no-print-directory -B $(SYSCFG)/h31proxy.conf
+	@$(MAKE) --no-print-directory -B $(SYSCFG)/mavnet.conf
 	$(SUDO) systemctl restart h31proxy
 
 see:
 	$(SUDO) cat $(SYSCFG)/h31proxy.conf
+	$(SUDO) cat $(SYSCFG)/mavnet.conf
 
 uninstall:
 	@$(MAKE) --no-print-directory disable

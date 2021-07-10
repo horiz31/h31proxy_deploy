@@ -1,0 +1,4 @@
+2021-07-09 23:11:25.2894 Warn Ignoring assembly location because location is empty: NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c
+2021-07-09 23:11:25.3075 Warn Ignoring assembly location because location is empty: h31proxy.net, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+2021-07-09 23:13:27.4735 Warn Ignoring assembly location because location is empty: NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c
+2021-07-09 23:13:27.4906 Warn Ignoring assembly location because location is empty: h31proxy.net, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null

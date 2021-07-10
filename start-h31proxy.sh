@@ -8,16 +8,6 @@
 SUDO=$(test ${EUID} -ne 0 && which sudo)
 LOCAL=/usr/local
 CONFIG_DIR=/etc/systemd
-ELP_H264_UVC=${LOCAL}/src/ELP_H264_UVC
-#PLATFORM=$(python3 serial_number.py | cut -c1-4) #PLATFORM is now stored in the video.conf file
-
 echo "Starting H31Proxy.net"
 
-function ifup {    
-    local output=$(ip link show "$1" up 2>/dev/null)
-    if [[ -n "$output" ]] ; then return 0        
-    else return 1
-    fi
-}
-
-/usr/local/bin/dotnet/dotnet ${LOCAL}/src/h31proxy/h31proxy.net.dll ${CONFIG_DIR}/h31proxy.conf ${CONFIG_DIR}/video.conf
+cd ${LOCAL}/src/h31proxy/ && ./h31proxy.net ${CONFIG_DIR}/h31proxy.conf ${CONFIG_DIR}/mavnet.conf ${CONFIG_DIR}/video.conf
