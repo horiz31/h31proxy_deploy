@@ -10,4 +10,4 @@ LOCAL=/usr/local
 CONFIG_DIR=/etc/systemd
 echo "Starting H31Proxy.net"
 
-cd ${LOCAL}/src/h31proxy/ && ./h31proxy.net ${CONFIG_DIR}/h31proxy.conf ${CONFIG_DIR}/mavnet.conf ${CONFIG_DIR}/video.conf
+cd ${LOCAL}/bin/h31proxy/ && ./h31proxy.net ${CONFIG_DIR}/h31proxy.conf ${CONFIG_DIR}/mavnet.conf ${CONFIG_DIR}/video.conf

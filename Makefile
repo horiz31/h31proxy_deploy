@@ -56,9 +56,9 @@ enable:
 
 install: dependencies	
 	@$(MAKE) --no-print-directory disable
-	@[ -d $(LOCAL)/src/h31proxy ] || mkdir $(LOCAL)/src/h31proxy
-	@$(SUDO) cp -a bin/. $(LOCAL)/src/h31proxy/
-	@$(SUDO) chmod +x $(LOCAL)/src/h31proxy/h31proxy.net
+	@[ -d $(LOCAL)/bin/h31proxy ] || mkdir $(LOCAL)/bin/h31proxy
+	@$(SUDO) cp -a bin/. $(LOCAL)/bin/h31proxy/
+	@$(SUDO) chmod +x $(LOCAL)/bin/h31proxy/h31proxy.net
 	@for s in $(LOCAL_SCRIPTS) ; do $(SUDO) install -Dm755 $${s} $(LOCAL)/bin/$${s} ; done
 	@$(MAKE) --no-print-directory -B $(SYSCFG)/h31proxy.conf
 	@$(MAKE) --no-print-directory -B $(SYSCFG)/mavnet.conf
