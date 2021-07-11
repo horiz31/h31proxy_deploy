@@ -30,10 +30,10 @@ default:
 
 $(SYSCFG)/h31proxy.conf:
 	@echo "Starting config wizard for h31proxy:"	
-	@./provision_h31.sh $@
+	@./provision_h31.sh bin/$@
 
 $(SYSCFG)/mavnet.conf:	
-	@./provision_mavnet.sh $@
+	@./provision_mavnet.sh bin/$@
 
 clean:
 	@if [ -d src ] ; then cd src && make clean ; fi
@@ -49,8 +49,13 @@ enable:
 	@( for s in $(SERVICES) ; do $(SUDO) install -Dm644 $${s%.*}.service $(LIBSYSTEMD)/$${s%.*}.service ; done ; true )
 	@if [ ! -z "$(SERVICES)" ] ; then $(SUDO) systemctl daemon-reload ; fi
 	@( for s in $(SERVICES) ; do $(SUDO) systemctl enable $${s%.*} ; done ; true )
+	@echo ""
+	@echo "Service is insalled. To run now use sudo systemctl start h31proxy"
+	@echo "Inspect output with sudo journalctl -fu h31proxy"
+	@echo ""
 
 install: dependencies	
+	@$(MAKE) --no-print-directory disable
 	@[ -d $(LOCAL)/src/h31proxy ] || mkdir $(LOCAL)/src/h31proxy
 	@$(SUDO) cp -a bin/. $(LOCAL)/src/h31proxy/
 	@$(SUDO) chmod +x $(LOCAL)/src/h31proxy/h31proxy.net
@@ -58,6 +63,7 @@ install: dependencies
 	@$(MAKE) --no-print-directory -B $(SYSCFG)/h31proxy.conf
 	@$(MAKE) --no-print-directory -B $(SYSCFG)/mavnet.conf
 	@$(MAKE) --no-print-directory enable
+
 
 provision:
 	@$(MAKE) --no-print-directory -B $(SYSCFG)/h31proxy.conf
