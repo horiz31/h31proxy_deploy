@@ -50,7 +50,7 @@ enable:
 	@if [ ! -z "$(SERVICES)" ] ; then $(SUDO) systemctl daemon-reload ; fi
 	@( for s in $(SERVICES) ; do $(SUDO) systemctl enable $${s%.*} ; done ; true )
 	@echo ""
-	@echo "Service is insalled. To run now use sudo systemctl start h31proxy"
+	@echo "Service is installed. To run now use sudo systemctl start h31proxy"
 	@echo "Inspect output with sudo journalctl -fu h31proxy"
 	@echo ""
 
