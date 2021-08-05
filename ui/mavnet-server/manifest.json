@@ -1,0 +1,10 @@
+{
+    "version": 0,
+
+    "menu": {
+        "mav-server": {
+            "label": "MAVNet Server Configuration",
+            "path": "server.html"
+        }
+    }
+}

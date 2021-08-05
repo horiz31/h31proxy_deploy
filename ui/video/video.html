@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Video Configuration</title>
+    <meta charset="utf-8">
+    <link href="../base1/cockpit.css" type="text/css" rel="stylesheet">
+    <script src="../base1/cockpit.js"></script>
+</head>
+<body>
+   <div class="pf-c-page">
+        <main class="pf-c-page__main" tabindex="-1">
+            <section class="pf-c-page__main-section pf-m-light">
+                <table class="form-table-ct" id="the-table">
+                    <tr>
+                        <td><label class="control-label" for="deivce">Device</label></td>
+                        <td><input id="device"></td>
+                    </tr>
+                    <tr>
+                        <td><label class="control-label" for="width">Video Frame Width</label></td>
+                        <td><input id="width" ></td>
+                    </tr>
+                    <tr>
+                        <td><label class="control-label" for="height">Video Height</label></td>
+                        <td><input id="height"></td>
+                    </tr>
+                    <tr>
+                        <td><label class="control-label" for="fps">Video Frames Per Second</label></td>
+                        <td><input id="fps"></td>
+                    </tr>
+                    <tr>
+                        <td><label class="control-label" for="losBitrate">LOS Bitrate</label></td>
+                        <td><input id="losBitrate"></td>
+                    </tr>
+                    <tr>
+                        <td><label class="control-label" for="losHost">LOS Host</label></td>
+                        <td><input id="losHost"></td>
+                    </tr>
+                    <tr>
+                        <td><label class="control-label" for="losPort">LOS Port</label></td>
+                        <td><input id="losPort" ></td>
+                    </tr>
+                    <tr>
+                        <td><label class="control-label" for="losIface">LOS Interface</label></td>
+                        <td><input id="losIface"></td>
+                    </tr>
+                    <tr>
+                        <td><label class="control-label" for="mavHost">MAVNet Host</label></td>
+                        <td><input id="mavHost"></td>
+                    </tr>
+                    <tr>
+                        <td><label class="control-label" for="mavPort">MAVNet Port</label></td>
+                        <td><input id="mavPort" ></td>
+                    </tr>
+                    <tr>
+                        <td><label class="control-label" for="mavIface">MAVNet Interface</label></td>
+                        <td><input id="mavIface"></td>
+                    </tr>
+                    <tr>
+                        <td><label class="control-label" for="mavBitrate">MAVNet Bitrate</label></td>
+                        <td><input id="mavBitrate"></td>
+                    </tr>
+                    <tr>
+                        <td><label class="control-label" for="atakHost">ATAK Host</label></td>
+                        <td><input id="atakHost"></td>
+                    </tr>
+                    <tr>
+                        <td><label class="control-label" for="atakPort">ATAK Port</label></td>
+                        <td><input id="atakPort" ></td>
+                    </tr>
+                    <tr>
+                        <td><label class="control-label" for="atakIface">ATAK Interface</label></td>
+                        <td><input id="atakIface"></td>
+                    </tr>
+                    <tr>
+                        <td><label class="control-label" for="atakBitrate">ATAK Bitrate</label></td>
+                        <td><input id="atakBitrate"></td>
+                    </tr>
+                    <tr>
+                        <td><label class="control-label" for="videoHost">Video Server Host</label></td>
+                        <td><input id="videoHost"></td>
+                    </tr>
+                    <tr>
+                        <td><label class="control-label" for="videoPort">Video Server Port</label></td>
+                        <td><input id="videoPort" ></td>
+                    </tr>
+                    <tr>
+                        <td><label class="control-label" for="videoBitrate">Video Server Bitrate</label></td>
+                        <td><input id="videoBitrate"></td>
+                    </tr>
+                    <tr>
+                        <td><label class="control-label" for="videoOrg">Video Server Organization</label></td>
+                        <td><input id="videoOrg"></td>
+                    </tr>
+                    <tr>
+                        <td><label class="control-label" for="videoName">Video Server Streamname</label></td>
+                        <td><input id="videoName"></td>
+                    </tr>
+                    <tr>
+                        <td><label class="control-label" for="platform">Platform</label></td>
+                        <td><input id="platform"></td>
+                    </tr>
+                    <tr>
+                        <td><button class="pf-c-button pf-m-primary" id="save">Save</button></td>
+                        <td><span id="result"></span></td>
+                    </tr>
+                </table>
+                <pre id="output"></pre>
+            </section>
+        </main>
+    </div>
+
+    <script src="video.js"></script>
+</body>
+</html>
+

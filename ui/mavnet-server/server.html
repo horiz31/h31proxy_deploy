@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MAVNet Server Configuration</title>
+    <meta charset="utf-8">
+    <link href="../base1/cockpit.css" type="text/css" rel="stylesheet">
+    <script src="../base1/cockpit.js"></script>
+</head>
+<body>
+   <div class="pf-c-page">
+        <main class="pf-c-page__main" tabindex="-1">
+            <section class="pf-c-page__main-section pf-m-light">
+                <table class="form-table-ct" id="the-table">
+                    <tr>
+                        <td><label class="control-label" for="serialNum">Serial Number</label></td>
+                        <td><input id="serialNum"></td>
+                    </tr>
+                    <tr>
+                        <td><label class="control-label" for="deviceTok">Device Token</label></td>
+                        <td><textarea id="deviceTok"></textarea></td>
+                    </tr>
+                    <tr>
+                        <td><label class="control-label" for="serverUrl">Server Address</label></td>
+                        <td><input id="serverUrl"></td>
+                    </tr>
+                    <tr>
+                        <td><button class="pf-c-button pf-m-primary" id="save">Save</button></td>
+                        <td><span id="result"></span></td>
+                    </tr>
+                </table>
+                <pre id="output"></pre>
+            </section>
+        </main>
+    </div>
+
+    <script src="server.js"></script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MAVNet Configuration</title>
+    <meta charset="utf-8">
+    <link href="../base1/cockpit.css" type="text/css" rel="stylesheet">
+    <script src="../base1/cockpit.js"></script>
+</head>
+<body>
+   <div class="pf-c-page">
+        <main class="pf-c-page__main" tabindex="-1">
+            <section class="pf-c-page__main-section pf-m-light">
+                <button class="pf-c button pf-m-primary" id="enable">Disable</button>
+                <table class="form-table-ct" id="the-table">
+                    <tr>
+                        <td><label class="control-label" for="losHost">LOS Host</label></td>
+                        <td><input id="losHost"></td>
+                    </tr>
+                    <tr>
+                        <td><label class="control-label" for="losPort">LOS Port</label></td>
+                        <td><input id="losPort"></td>
+                    </tr>
+                    <tr>
+                        <td><label class="control-label" for="losIface">LOS Interface</label></td>
+                        <td><input id="losIface"></td>
+                    </tr>
+                    <tr>
+                        <td><label class="control-label" for="backupHost">Backup Host</label></td>
+                        <td><input id="backupHost"></td>
+                    </tr>
+                    <tr>
+                        <td><label class="control-label" for="backupPort">Backup Port</label></td>
+                        <td><input id="backupPort"></td>
+                    </tr>
+                    <tr>
+                        <td><label class="control-label" for="backupIface">Backup Interface</label></td>
+                        <td><input id="backupIface"></td>
+                    </tr>
+                    <tr>
+                        <td><label class="control-label" for="fmuDevice">FMU Device</label></td>
+                        <td><input id="fmuDevice"></td>
+                    </tr>
+                    <tr>
+                        <td><label class="control-label" for="baudrate">Baud Rate</label></td>
+                        <td><input id="baudrate"></td>
+                    </tr>
+                    <tr>
+                        <td><label class="control-label" for="fmuId">FMU System ID</label></td>
+                        <td><input id="fmuId"></td>
+                    </tr>
+                    <tr>
+                        <td><label class="control-label" for="atakHost">ATAK Host</label></td>
+                        <td><input id="atakHost"></td>
+                    </tr>
+                    <tr>
+                        <td><label class="control-label" for="atakPort">ATAK Port</label></td>
+                        <td><input id="atakPort"></td>
+                    </tr>
+                    <tr>
+                        <td><button class="pf-c-button pf-m-primary" id="save">Save</button></td>
+                        <td><span id="result"></span></td>
+                    </tr>
+                </table>
+                <pre id="output"></pre>
+            </section>
+        </main>
+    </div>
+
+    <script src="mavnet.js"></script>
+</body>
+</html>
