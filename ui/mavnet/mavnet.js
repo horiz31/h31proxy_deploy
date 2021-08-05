@@ -102,9 +102,9 @@ function EnableService(){
 
 function CreateSystemDService(){
     // copy the the service over
-    cockpit.spawn(["cp", "-rf", "/usr/local/share/mavnetProxy/scripts/mavnet.service", "/lib/systemd/system/"]);
+    cockpit.spawn(["cp", "-rf", "/usr/local/share/h31proxy_deploy/h31proxy.service", "/lib/systemd/system/"]);
     // make ln for multi-user
-    cockpit.spawn(["ln", "-sf", "/etc/systemd/system/mavnet.service", "/etc/systemd/system/multi-user.target.wants/mavnet.service"]);
+    cockpit.spawn(["ln", "-sf", "/etc/systemd/system/h31proxy.service", "/etc/systemd/system/multi-user.target.wants/h31proxy.service"]);
 }
 
 // When disable is pressed we need to re write the conf file to 
@@ -136,9 +136,9 @@ function DisableService(){
 // removes the links
 function RemoveSystemLinks(){
     // remove the service file
-    cockpit.spawn(["rm", "-rf", "/lib/systemd/system/mavnet.service"]);
+    cockpit.spawn(["rm", "-rf", "/lib/systemd/system/h31proxy.service"]);
     // remove ln for multi-user
-    cockpit.spawn(["rm", "-rf", "/etc/systemd/system/multi-user.target.wants/service.service"]);
+    cockpit.spawn(["rm", "-rf", "/etc/systemd/system/multi-user.target.wants/h31proxy.service"]);
     result.innerHTML = "Removed Serivce files";
 }
 
