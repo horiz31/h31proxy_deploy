@@ -27,7 +27,7 @@ To make future changes in the provisioning:
 make -C $HOME/h31proxy_deploy provision
 ```
 
-This will enter into an interactive session to help you setup your APN
+This will enter into an interactive session to help you create the necessary config files
 
 
 ## Supported Platforms
