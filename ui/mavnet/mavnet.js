@@ -64,6 +64,18 @@ function FailureReadFile(error) {
     // Display error message
     output.innerHTML = "Error : " + error.message;
     // TODO :: Defaults should go here.
+
+    losHost.value = "224.10.10.10";
+    losPort.value = "14550";
+    losIface = "eth0";
+    backupHost = "225.10.10.10";
+    backupPort = "14560";
+    backupIface.value = "edge0";
+    fmuDevice = "/dev/ttyTHS1";
+    baudrate.value = "500000";
+    fmuId.value = "1";
+    atakHost.value = "239.2.3.1";
+    atakPort.value = "6969";    
 }
 
 // The callback on the enable button
