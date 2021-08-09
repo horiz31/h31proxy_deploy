@@ -63,6 +63,7 @@ install: dependencies
 	@$(MAKE) --no-print-directory -B $(SYSCFG)/h31proxy.conf
 	@$(MAKE) --no-print-directory -B $(SYSCFG)/mavnet.conf
 	@$(MAKE) --no-print-directory enable
+	@$(SUDO) rm -rf /usr/share/cockpit/mavnet/ /usr/share/cockpit/mavnet-server/ /usr/share/cockpit/video/
 	@$(SUDO) mkdir /usr/share/cockpit/mavnet/
 	@$(SUDO) cp -rf ui/mavnet/* /usr/share/cockpit/mavnet/
 	@$(SUDO) mkdir /usr/share/cockpit/mavnet-server/

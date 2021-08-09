@@ -1,4 +1,4 @@
-const deviceH264 = document.getElementById("deviceH64");
+const deviceH264 = document.getElementById("deviceH264");
 const deviceX = document.getElementById("deviceX");
 const width = document.getElementById("width");
 const height = document.getElementById("height");
@@ -23,7 +23,7 @@ const videoName = document.getElementById("videoName");
 const audioPort = document.getElementById("audioPort");
 const audioBitrate = document.getElementById("audioBitrate");
 const platform = document.getElementById("platform");
-const CONFIG_LENGTH = 22;
+const CONFIG_LENGTH = 24;
 
 document.onload = InitPage();
 

@@ -34,15 +34,15 @@ function SuccessReadFile(content) {
         if(splitResult.length >= CONFIG_LENGTH) {
             losHost.value = splitResult[1].split("=")[1];
             losPort.value = splitResult[2].split("=")[1];
-            losIface = splitResult[3].split("=")[1];
-            backupHost = splitResult[4].split("=")[1];
-            backupPort = splitResult[5].split("=")[1];
+            losIface.value = splitResult[3].split("=")[1];
+            backupHost.value = splitResult[4].split("=")[1];
+            backupPort.value = splitResult[5].split("=")[1];
             backupIface.value = splitResult[6].split("=")[1];
-            fmuDevice = splitResult[7].split("=")[1];
+            fmuDevice.value = splitResult[7].split("=")[1];
             baudrate.value = splitResult[8].split("=")[1];
             fmuId.value = splitResult[9].split("=")[1];
             atakHost.value = splitResult[10].split("=")[1];
-            atakPort = splitResult[11].split("=")[1];
+            atakPort.value = splitResult[11].split("=")[1];
             enabled = (splitResult[12].split("=")[1] == "true");
         }
         else{
