@@ -30,10 +30,10 @@ default:
 
 $(SYSCFG)/h31proxy.conf:
 	@echo "Starting config wizard for h31proxy:"	
-	@./provision_h31.sh bin/$@
+	@./provision_h31.sh $@
 
 $(SYSCFG)/mavnet.conf:	
-	@./provision_mavnet.sh bin/$@
+	@./provision_mavnet.sh $@
 
 clean:
 	@if [ -d src ] ; then cd src && make clean ; fi
