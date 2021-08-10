@@ -22,7 +22,7 @@ document.getElementById("save").addEventListener("click", SaveSettings);
 // This attempts to read the conf file, if it exists, then it will parse it and fill out the table
 // if it fails then the values are loaded with defaults.
 function InitPage() {
-    cockpit.file("/etc/systemd/mavnetProxy.conf")
+    cockpit.file("/etc/systemd/h31Proxy.conf")
         .read().then((content, tag) => SuccessReadFile(content))
             .catch(error => FailureReadFile(error));
 }
@@ -108,7 +108,7 @@ function EnableService(){
         "ATAK_PORT=" + atakPort.value + "\n" +
         "ENABLED=" + enabled.toString() + "\n";
 
-    cockpit.file("/etc/systemd/mavnetProxy.conf").replace(fileString)
+    cockpit.file("/etc/systemd/h31Proxy.conf").replace(fileString)
         .then(CreateSystemDService).catch(error => {output.innerHTML = error.message});
 }
 
@@ -141,7 +141,7 @@ function DisableService(){
         "ATAK_PORT=" + atakPort.value + "\n" +
         "ENABLED=" + enabled.toString() + "\n";
 
-    cockpit.file("/etc/systemd/mavnetProxy.conf").replace(fileString)
+    cockpit.file("/etc/systemd/h31Proxy.conf").replace(fileString)
         .then(RemoveSystemLinks).catch(error => {output.innerHTML = error.message});
 }
 
@@ -169,11 +169,11 @@ function SaveSettings() {
         "ATAK_PORT=" + atakPort.value + "\n" +
         "ENABLED=" + enabled.toString() + "\n";
 
-    cockpit.file("/etc/systemd/mavnetProxy.conf").replace(fileString)
+    cockpit.file("/etc/systemd/h31Proxy.conf").replace(fileString)
         .then(Success)
         .catch(Fail);
 
-    cockpit.spawn(["systemctl", "restart", "mavnet"]);
+    cockpit.spawn(["systemctl", "restart", "h31proxy"]);
 }
 
 function Success() {
