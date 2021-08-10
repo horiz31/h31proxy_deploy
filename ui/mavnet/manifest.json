@@ -3,7 +3,7 @@
 
     "menu": {
         "mavnet": {
-            "label": "MAVNet Configuration",
+            "label": "H31 Configuration",
             "path": "mavnet.html"
         }
     }
