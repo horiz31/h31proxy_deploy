@@ -30,7 +30,7 @@ document.onload = InitPage();
 document.getElementById("save").addEventListener("click", SaveSettings);
 
 function InitPage() {
-    cockpit.file("/etc/systemd/video.conf").read().then((content, tag) => SuccessReadFile(content))
+    cockpit.file("/usr/share/conf/video.conf").read().then((content, tag) => SuccessReadFile(content))
     .catch(error => FailureReadFile(error));
 }
 
@@ -108,7 +108,7 @@ function FailureReadFile(error) {
 
 function SaveSettings() {
 
-    cockpit.file("/etc/systemd/video.conf").replace("[Service]\n" + 
+    cockpit.file("/usr/share/conf/video.conf").replace("[Service]\n" + 
         "DEVICE_H264=" + deviceH264.value + "\n" +
         "DEVICE_XRAW=" + deviceX.value + "\n" +
         "LOS_WIDTH=" + width.value + "\n" +
