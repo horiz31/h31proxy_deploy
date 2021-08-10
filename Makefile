@@ -7,11 +7,11 @@ SUDO := $(shell test $${EUID} -ne 0 && echo "sudo")
 
 SERIAL ?= $(shell python3 serial_number.py)
 LOCAL=/usr/local
-LOCAL_SCRIPTS=start-h31proxy.sh
+LOCAL_SCRIPTS=scripts/start-h31proxy.sh
 CONFIG ?= /var/local
 LIBSYSTEMD=/lib/systemd/system
 PKGDEPS ?= 
-SERVICES=h31proxy.service
+SERVICES=scripts/h31proxy.service
 SYSCFG=/etc/systemd
 DRY_RUN=false
 PLATFORM ?= $(shell python serial_number.py | cut -c1-4)
@@ -30,10 +30,10 @@ default:
 
 $(SYSCFG)/h31proxy.conf:
 	@echo "Starting config wizard for h31proxy:"	
-	@./provision_h31.sh $@
+	@./scripts/provision_h31.sh $@
 
 $(SYSCFG)/mavnet.conf:	
-	@./provision_mavnet.sh $@
+	@./scripts/provision_mavnet.sh $@
 
 clean:
 	@if [ -d src ] ; then cd src && make clean ; fi
