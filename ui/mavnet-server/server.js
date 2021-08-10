@@ -52,7 +52,7 @@ function SaveSettings() {
         .then(Success)
         .catch(Fail);
 
-    cockpit.spawn(["systemctl", "restart", "mavnet"]);
+    cockpit.spawn(["systemctl", "restart", "h31proxy"]);
 }
 
 function Success() {
