@@ -66,7 +66,7 @@ case "$(basename $CONF)" in
 		if ! $DEFAULTS ; then
 			SERIAL_NUMBER=$(interactive "$SERIAL_NUMBER" "SERIAL_NUMBER, MAVNet serial number")	
 			DEVICE_TOKEN=$(interactive "$DEVICE_TOKEN" "DEVICE_TOKEN, Device token, obtained by first provisioning the device on the MAVNet server")	
-			SERVER_ADDRESS=$(interactive "$SERVER_ADDRESS" "SERVER_ADDRESS, Serve address")									
+			SERVER_ADDRESS=$(interactive "$SERVER_ADDRESS" "SERVER_ADDRESS, Server address")									
 		fi	
 		echo "[Service]" > /tmp/$$.env && \
 		echo "SERIAL_NUMBER=${SERIAL_NUMBER}" >> /tmp/$$.env && \
