@@ -32,15 +32,15 @@ function SuccessReadFile(content) {
         var splitResult = content.split("\n");
         
         if(splitResult.length >= CONFIG_LENGTH) {
-            losHost.value = splitResult[1].split("=")[1];
-            losPort.value = splitResult[2].split("=")[1];
-            losIface.value = splitResult[3].split("=")[1];
-            backupHost.value = splitResult[4].split("=")[1];
-            backupPort.value = splitResult[5].split("=")[1];
-            backupIface.value = splitResult[6].split("=")[1];
-            fmuDevice.value = splitResult[7].split("=")[1];
-            baudrate.value = splitResult[8].split("=")[1];
-            fmuId.value = splitResult[9].split("=")[1];
+            fmuDevice.value = splitResult[1].split("=")[1];
+            baudrate.value = splitResult[2].split("=")[1];
+            fmuId.value = splitResult[3].split("=")[1];
+            losHost.value = splitResult[4].split("=")[1];
+            losPort.value = splitResult[5].split("=")[1];
+            losIface.value = splitResult[6].split("=")[1];
+            backupHost.value = splitResult[7].split("=")[1];
+            backupPort.value = splitResult[8].split("=")[1];
+            backupIface.value = splitResult[9].split("=")[1];          
             atakHost.value = splitResult[10].split("=")[1];
             atakPort.value = splitResult[11].split("=")[1];
             enabled = (splitResult[12].split("=")[1] == "true");
@@ -95,15 +95,15 @@ function EnableService(){
     document.getElementById("the-table").hidden = false;
 
     var fileString = "[Service]\n" + 
+        "FMU_SERIAL=" + fmuDevice.value + "\n" +
+        "FMU_BAUDRATE=" + baudrate.value + "\n" +
+        "FMU_SYSID=" + fmuId.value + "\n" +
         "LOS_HOST=" + losHost.value + "\n" +
         "LOS_PORT=" + losPort.value + "\n" +
         "LOS_IFACE=" + losIface.value + "\n" +
         "BACKUP_HOST=" + backupHost.value + "\n" +
         "BACKUP_PORT=" + backupPort.value + "\n" +
         "BACKUP_IFACE=" + backupIface.value + "\n" +
-        "FMU_SERIAL=" + fmuDevice.value + "\n" +
-        "FMU_BAUDRATE=" + baudrate.value + "\n" +
-        "FMU_SYSID=" + fmuId.value + "\n" +
         "ATAK_HOST=" + atakHost.value + "\n" +
         "ATAK_PORT=" + atakPort.value + "\n" +
         "ENABLED=" + enabled.toString() + "\n";
@@ -128,15 +128,15 @@ function DisableService(){
     document.getElementById("the-table").hidden = true;
 
     var fileString = "[Service]\n" + 
+        "FMU_SERIAL=" + fmuDevice.value + "\n" +
+        "FMU_BAUDRATE=" + baudrate.value + "\n" +
+        "FMU_SYSID=" + fmuId.value + "\n" +
         "LOS_HOST=" + losHost.value + "\n" +
         "LOS_PORT=" + losPort.value + "\n" +
         "LOS_IFACE=" + losIface.value + "\n" +
         "BACKUP_HOST=" + backupHost.value + "\n" +
         "BACKUP_PORT=" + backupPort.value + "\n" +
         "BACKUP_IFACE=" + backupIface.value + "\n" +
-        "FMU_SERIAL=" + fmuDevice.value + "\n" +
-        "FMU_BAUDRATE=" + baudrate.value + "\n" +
-        "FMU_SYSID=" + fmuId.value + "\n" +
         "ATAK_HOST=" + atakHost.value + "\n" +
         "ATAK_PORT=" + atakPort.value + "\n" +
         "ENABLED=" + enabled.toString() + "\n";
@@ -156,15 +156,15 @@ function RemoveSystemLinks(){
 
 function SaveSettings() {
     var fileString = "[Service]\n" + 
+        "FMU_SERIAL=" + fmuDevice.value + "\n" +
+        "FMU_BAUDRATE=" + baudrate.value + "\n" +
+        "FMU_SYSID=" + fmuId.value + "\n" +
         "LOS_HOST=" + losHost.value + "\n" +
         "LOS_PORT=" + losPort.value + "\n" +
         "LOS_IFACE=" + losIface.value + "\n" +
         "BACKUP_HOST=" + backupHost.value + "\n" +
         "BACKUP_PORT=" + backupPort.value + "\n" +
-        "BACKUP_IFACE=" + backupIface.value + "\n" +
-        "FMU_SERIAL=" + fmuDevice.value + "\n" +
-        "FMU_BAUDRATE=" + baudrate.value + "\n" +
-        "FMU_SYSID=" + fmuId.value + "\n" +
+        "BACKUP_IFACE=" + backupIface.value + "\n" +      
         "ATAK_HOST=" + atakHost.value + "\n" +
         "ATAK_PORT=" + atakPort.value + "\n" +
         "ENABLED=" + enabled.toString() + "\n";
