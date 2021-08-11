@@ -40,7 +40,7 @@ function SuccessReadFile(content) {
         
         if(splitResult.length >= CONFIG_LENGTH) {
             deviceH264.value = splitResult[1].split("=")[1];
-            deviceX.value = spitResult[2].splint("=")[1];
+            deviceX.value = splitResult[2].split("=")[1];
             width.value = splitResult[3].split("=")[1];
             height.value = splitResult[4].split("=")[1];
             fps.value = splitResult[5].split("=")[1];
