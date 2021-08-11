@@ -137,7 +137,8 @@ function SaveSettings() {
         .then(Success)
         .catch(Fail);
 
-    cockpit.spawn(["systemctl", "restart", "video h31proxy"]);
+    cockpit.spawn(["systemctl", "restart", "video"]);
+    cockpit.spawn(["systemctl", "restart", "h31video"]);
 }
 
 function Success() {
