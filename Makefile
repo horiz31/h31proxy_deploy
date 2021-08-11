@@ -71,8 +71,10 @@ install: dependencies
 	@$(SUDO) mkdir /usr/share/cockpit/video/
 	@$(SUDO) cp -rf ui/video/* /usr/share/cockpit/video/
 	@$(SUDO) cp -f ui/branding-ubuntu/* /usr/share/cockpit/branding/ubuntu/
-    @$(SUDO) cp -f ui/static/* /usr/share/cockpit/static/	
-
+	@$(SUDO) cp -f ui/static/* /usr/share/cockpit/static/	
+	@$(SUDO) ln -sf /usr/local/share/h31proxy_deploy/h31proxy.conf /etc/systemd/h31proxy.conf
+	@$(SUDO) ln -sf /usr/local/share/h31proxy_deploy/mavnet.conf /etc/systemd/mavnet.conf
+	@$(SUDO) ln -sf /usr/local/share/h31proxy_deploy/video.conf /etc/systemd/video.conf
 
 provision:
 	@$(MAKE) --no-print-directory -B $(SYSCFG)/h31proxy.conf

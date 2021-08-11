@@ -10,7 +10,7 @@ document.getElementById("save").addEventListener("click", SaveSettings);
 document.onload = InitPage();
 
 function InitPage() {
-    cockpit.file("/etc/systemd/mavnet.conf").read().then((content, tag) => SuccessReadFile(content))
+    cockpit.file("/usr/local/share/h31proxy_deploy/mavnet.conf").read().then((content, tag) => SuccessReadFile(content))
     .catch(error => FailureReadFile(error));
 }
 
@@ -45,7 +45,7 @@ function FailureReadFile(error) {
 
 function SaveSettings() {
 
-    cockpit.file("/etc/systemd/mavnet.conf").replace("[Service]\n" + 
+    cockpit.file("/usr/local/share/h31proxy_deploy/mavnet.conf").replace("[Service]\n" + 
         "SERIAL_NUMBER=" + serialNum.value + "\n" +
         "DEVICE_TOKEN=" + deviceTok.value + "\n" +
         "SERVER_ADDRESS=" + serverUrl.value + "\n")
