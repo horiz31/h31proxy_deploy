@@ -132,7 +132,7 @@ function SaveSettings() {
         "VIDEOSERVER_ORG=" + videoOrg.value + "\n" +
         "VIDEOSERVER_STREAMNAME=" + videoName.value + "\n" +
         "AUDIO_PORT=" + audioPort.value + "\n" +
-        "AUDIO_BITRATE" + audioBitrate.value + "\n" +
+        "AUDIO_BITRATE=" + audioBitrate.value + "\n" +
         "PLATFORM=" + platform.value + "\n")
         .then(Success)
         .catch(Fail);
