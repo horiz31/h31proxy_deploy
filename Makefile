@@ -70,7 +70,7 @@ install: dependencies
 	@$(SUDO) cp -rf ui/mavnet-server/* /usr/share/cockpit/mavnet-server/
 	@$(SUDO) mkdir /usr/share/cockpit/video/
 	@$(SUDO) cp -rf ui/video/* /usr/share/cockpit/video/
-	@$(SUDO) mkdir -p /usr/share/conf/
+	@$(SUDO) mkdir -p -m 777 /usr/share/conf/
 	@$(SUDO) cp -f ui/branding-ubuntu/* /usr/share/cockpit/branding/ubuntu/
 	
 
