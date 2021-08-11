@@ -71,7 +71,7 @@ install: dependencies
 	@$(SUDO) mkdir /usr/share/cockpit/video/
 	@$(SUDO) cp -rf ui/video/* /usr/share/cockpit/video/
 	@$(SUDO) cp -f ui/branding-ubuntu/* /usr/share/cockpit/branding/ubuntu/
-	
+    @$(SUDO) cp -f ui/static/* /usr/share/cockpit/static/	
 
 
 provision:
