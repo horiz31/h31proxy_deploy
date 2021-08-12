@@ -10,8 +10,8 @@ LOCAL=/usr/local
 LOCAL_SCRIPTS=scripts/start-h31proxy.sh
 CONFIG ?= /var/local
 LIBSYSTEMD=/lib/systemd/system
-PKGDEPS ?= 
-SERVICES=scripts/h31proxy.service
+PKGDEPS ?= cockpit 
+SERVICES=h31proxy.service
 SYSCFG=/etc/systemd
 DRY_RUN=false
 PLATFORM ?= $(shell python serial_number.py | cut -c1-4)
@@ -72,9 +72,9 @@ install: dependencies
 	@$(SUDO) cp -rf ui/video/* /usr/share/cockpit/video/
 	@$(SUDO) cp -f ui/branding-ubuntu/* /usr/share/cockpit/branding/ubuntu/
 	@$(SUDO) cp -f ui/static/* /usr/share/cockpit/static/	
-	@$(SUDO) ln -sf /usr/local/share/h31proxy_deploy/h31proxy.conf /etc/systemd/h31proxy.conf
-	@$(SUDO) ln -sf /usr/local/share/h31proxy_deploy/mavnet.conf /etc/systemd/mavnet.conf
-	@$(SUDO) ln -sf /usr/local/share/h31proxy_deploy/video.conf /etc/systemd/video.conf
+#	@$(SUDO) ln -sf /usr/local/share/h31proxy_deploy/h31proxy.conf /etc/systemd/h31proxy.conf
+#	@$(SUDO) ln -sf /usr/local/share/h31proxy_deploy/mavnet.conf /etc/systemd/mavnet.conf
+#	@$(SUDO) ln -sf /usr/local/share/h31proxy_deploy/video.conf /etc/systemd/video.conf
 
 provision:
 	@$(MAKE) --no-print-directory -B $(SYSCFG)/h31proxy.conf
