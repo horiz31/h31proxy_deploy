@@ -18,13 +18,13 @@ body.login-pf {
 }
 
 #brand:before {
-    content: "Horizon31";
+    content: "PixC4-Jetson";
 }
 
 #index-brand {
-    content: "${NAME}";
+    content: "PixC4-Jetson";
 }
 
 #index-brand:before {
-    content: "${NAME}";
+    content: "PixC4-Jetson";
 }
