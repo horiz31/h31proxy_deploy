@@ -3,20 +3,24 @@
 <head>
     <title>MAVNet Server Configuration</title>
     <meta charset="utf-8">
-    <link href="../base1/cockpit.css" type="text/css" rel="stylesheet">
+    <link href="../base1/bootstrap.min.css" type="text/css" rel="stylesheet">
     <script src="../base1/cockpit.js"></script>
 </head>
 <body>
    <div class="pf-c-page">
         <main class="pf-c-page__main" tabindex="-1">
             <section class="pf-c-page__main-section pf-m-light">
-                <table class="form-table-ct" id="the-table">
+                <div class="col-sm-7">
+                <p class="fw-bold fs-2 ms-3 mt-3">MAVNet Server Provisioning</p>
+                <table class="table caption-top table-borderless ms-3" id="the-table">
+                    <caption>The PixC4-Jetson communicates with the MAVNet cloud server using the informaiton below.</caption>
+                 
                     <tr>
-                        <td><label class="control-label" for="serialNum">Serial Number</label></td>
+                        <td title="The serial number can be specified during provisioning, log in to https://gcs.horizon31.com/setup"><label class="control-label" for="serialNum">Serial Number</label></td>
                         <td><input id="serialNum"></td>
                     </tr>
                     <tr>
-                        <td><label class="control-label" for="deviceTok">API Key</label></td>
+                        <td title="The API key can be obtained after provisioning the device, log in to https://gcs.horizon31.com/setup"><label class="control-label" for="deviceTok">API Key</label></td>
                         <td><textarea id="deviceTok"></textarea></td>
                     </tr>
                     <tr>
@@ -29,6 +33,7 @@
                     </tr>
                 </table>
                 <pre id="output"></pre>
+            </div>
             </section>
         </main>
     </div>
