@@ -3,51 +3,48 @@
 <head>
     <title>H31 Configuration</title>
     <meta charset="utf-8">
-    <link href="../base1/cockpit.css" type="text/css" rel="stylesheet">
+    <link href="../base1/bootstrap.min.css" type="text/css" rel="stylesheet">
     <script src="../base1/cockpit.js"></script>
 </head>
 <body>
    <div class="pf-c-page">
         <main class="pf-c-page__main" tabindex="-1">
             <section class="pf-c-page__main-section pf-m-light">
-                <button class="pf-c button pf-m-primary" id="enable">Disable</button>
-                <table class="form-table-ct" id="the-table">
+
+
+                <div class="col-sm-7">
+                    <p class="fw-bold fs-2 ms-3 mt-3">H31 Proxy Settings</p>
+                   
+                    <button hidden class="pf-c button pf-m-primary" id="enable">Disable</button>
+                    <table class="table caption-top table-borderless ms-3" id="the-table">
+                        <caption>The H31 Proxy software provides the network inteface between the FMU and the various network endpoints. It also interacts with the video system to start and stop video streams in certain circumstances.</caption>
+                    <tr><td colspan="2"><p class="fw-bold fs-5 mt-3">Primary Telemtry Link Information</p><p class="fw-light fs-6">This link is the primary telemetry link. Typically multicast on a Mobile Ad Hoc network. These settings must match the GCS being used. Default port is 14550 for primary.</p></td></tr>
                     <tr>
-                        <td><label class="control-label" for="losHost">LOS Host</label></td>
+                        <td><label class="control-label" for="losHost">Host</label></td>
                         <td><input id="losHost"></td>
                     </tr>
                     <tr>
-                        <td><label class="control-label" for="losPort">LOS Port</label></td>
+                        <td><label class="control-label" for="losPort">Port</label></td>
                         <td><input id="losPort"></td>
                     </tr>
                     <tr>
-                        <td><label class="control-label" for="losIface">LOS Interface</label></td>
+                        <td><label class="control-label" for="losIface">Interface</label></td>
                         <td><input id="losIface"></td>
                     </tr>
+                    <tr><td colspan="2"><p class="fw-bold fs-5 mt-3">Backup Telemtry Link Information</p><p class="fw-light fs-6">This link is the backup telemetry link. Typically multicast over cellular using MAVPN. These settings must match the GCS being used. Default port is 14560 for backup.</p></td></tr>
                     <tr>
-                        <td><label class="control-label" for="backupHost">Backup Host</label></td>
+                        <td><label class="control-label" for="backupHost">Host</label></td>
                         <td><input id="backupHost"></td>
                     </tr>
                     <tr>
-                        <td><label class="control-label" for="backupPort">Backup Port</label></td>
+                        <td><label class="control-label" for="backupPort">Port</label></td>
                         <td><input id="backupPort"></td>
                     </tr>
                     <tr>
-                        <td><label class="control-label" for="backupIface">Backup Interface</label></td>
+                        <td><label class="control-label" for="backupIface">Interface</label></td>
                         <td><input id="backupIface"></td>
                     </tr>
-                    <tr>
-                        <td><label class="control-label" for="fmuDevice">FMU Device</label></td>
-                        <td><input id="fmuDevice"></td>
-                    </tr>
-                    <tr>
-                        <td><label class="control-label" for="baudrate">Baud Rate</label></td>
-                        <td><input id="baudrate"></td>
-                    </tr>
-                    <tr>
-                        <td><label class="control-label" for="fmuId">FMU System ID</label></td>
-                        <td><input id="fmuId"></td>
-                    </tr>
+                    <tr><td colspan="2"><p class="fw-bold fs-5 mt-3">ATAK CoT Setup</p><p class="fw-light fs-6">These settings are used for the ATAK Cursor-on-target generator. The mulicast address should match the CoT multicast address defined by the TAK network.</p></td></tr>
                     <tr>
                         <td><label class="control-label" for="atakHost">ATAK Host</label></td>
                         <td><input id="atakHost"></td>
@@ -56,8 +53,22 @@
                         <td><label class="control-label" for="atakPort">ATAK Port</label></td>
                         <td><input id="atakPort"></td>
                     </tr>
+                    <tr><td colspan="2"><p class="fw-bold fs-5 mt-3">FMU Setup</p><p class="fw-light fs-6">These settings are used to enable the companion computer to interface with the FMU. These settings must match the FMU firmware settings.</p></td></tr>
                     <tr>
-                        <td><button class="pf-c-button pf-m-primary" id="save">Save</button></td>
+                        <td><label class="control-label" for="fmuDevice">Linux serial device</label></td>
+                        <td><input id="fmuDevice"></td>
+                    </tr>
+                    <tr>
+                        <td><label class="control-label" for="baudrate">Baud Rate</label></td>
+                        <td><input id="baudrate"></td>
+                    </tr>
+                    <tr>
+                        <td><label class="control-label" for="fmuId">System ID</label></td>
+                        <td><input id="fmuId"></td>
+                    </tr>
+                   
+                    <tr>
+                        <td><button class="btn-primary" id="save">Save</button></td>
                         <td><span id="result"></span></td>
                     </tr>
                 </table>
