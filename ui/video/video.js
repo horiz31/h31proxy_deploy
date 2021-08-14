@@ -143,12 +143,12 @@ function SaveSettings() {
 
 function Success() {
     result.style.color = "green";
-    result.innerHTML = "success";
+    result.innerHTML = "Success, video and telemetry restarting...";
 }
 
 function Fail() {
     result.style.color = "red";
-    result.innerHTML = "fail";
+    result.innerHTML = "Failure, settings NOT changed!";
 }
 
 // Send a 'init' message.  This tells integration tests that we are ready to go
