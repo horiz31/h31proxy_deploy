@@ -46,10 +46,10 @@ function SuccessReadFile(content) {
         var splitResult = content.split("\n");
         
         if(splitResult.length >= CONFIG_LENGTH) {
-            cockpit.script("/usr/local/share/h31proxy_deploy/scripts/videoScript.sh -d")
+            cockpit.script("/usr/local/share/h31proxy_deploy/scripts/cockpitScript.sh -d")
                 .then((content) => AddDropDown(deviceH264, content.split("\n"), splitResult[1].split("=")[1]))
                 .catch(error => Fail(error));
-            cockpit.script("/usr/local/share/h31proxy_deploy/scripts/videoScript.sh -d")
+            cockpit.script("/usr/local/share/h31proxy_deploy/scripts/cockpitScript.sh -d")
                 .then((content) => AddDropDown(deviceX, content.split("\n"), splitResult[2].split("=")[1]))
                 .catch(error => Fail(error));
             AddDropDown(widthAndHeight, widthAndHeightArray, splitResult[3].split("=")[1] + "x" + splitResult[4].split("=")[1]);
@@ -57,18 +57,18 @@ function SuccessReadFile(content) {
             AddDropDown(losBitrate, losBitrateArray, splitResult[6].split("=")[1]);
             losHost.value = splitResult[7].split("=")[1];
             losPort.value = splitResult[8].split("=")[1];
-            cockpit.script("/usr/local/share/h31proxy_deploy/scripts/videoScript.sh -i")
+            cockpit.script("/usr/local/share/h31proxy_deploy/scripts/cockpitScript.sh -i")
                 .then((content) => AddDropDown(losIface, content.split("\n"), splitResult[9].split("=")[1]))
                 .catch(error => Fail(error));
             mavHost.value = splitResult[10].split("=")[1];
             mavPort.value = splitResult[11].split("=")[1];
-            cockpit.script("/usr/local/share/h31proxy_deploy/scripts/videoScript.sh -i")
+            cockpit.script("/usr/local/share/h31proxy_deploy/scripts/cockpitScript.sh -i")
                 .then((content) => AddDropDown(mavIface, content.split("\n"), splitResult[12].split("=")[1]))
                 .catch(error => Fail(error));
             AddDropDown(mavBitrate, serverBitrateArray, splitResult[13].split("=")[1]);
             atakHost.value = splitResult[14].split("=")[1];
             atakPort.value = splitResult[15].split("=")[1];
-            cockpit.script("/usr/local/share/h31proxy_deploy/scripts/videoScript.sh -i")
+            cockpit.script("/usr/local/share/h31proxy_deploy/scripts/cockpitScript.sh -i")
                 .then((content) => AddDropDown(atakIface, content.split("\n"), splitResult[16].split("=")[1]))
                 .catch(error => Fail(error));
             // atakBitrateDefault = splitResult[17].split("=")[1];
