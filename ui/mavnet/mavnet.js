@@ -10,6 +10,8 @@ const fmuId = document.getElementById("fmuId");
 const atakHost = document.getElementById("atakHost");
 const atakPort = document.getElementById("atakPort");
 const CONFIG_LENGTH = 11;
+// standard Baud rates
+const baudRateArray = [ 38400, 57600, 115200, 230400, 460800, 500000, 921600 ];
 
 enabled = true;
 // Runs the initPage when the document is loaded
@@ -32,15 +34,21 @@ function SuccessReadFile(content) {
         var splitResult = content.split("\n");
         
         if(splitResult.length >= CONFIG_LENGTH) {
-            fmuDevice.value = splitResult[1].split("=")[1];
-            baudrate.value = splitResult[2].split("=")[1];
+            cockpit.script("/usr/local/share/h31proxy_deploy/scripts/cockpitScript.sh -s")
+                .then((content) => AddDropDown(fmuDevice, content.split("\n"), splitResult[1].split("=")[1]))
+                .catch(error => Fail(error));
+            AddDropDown(baudrate, baudRateArray, splitResult[2].split("=")[1]);
             fmuId.value = splitResult[3].split("=")[1];
             losHost.value = splitResult[4].split("=")[1];
             losPort.value = splitResult[5].split("=")[1];
-            losIface.value = splitResult[6].split("=")[1];
+            cockpit.script("/usr/local/share/h31proxy_deploy/scripts/cockpitScript.sh -i")
+                .then((content) => AddDropDown(losIface, content.split("\n"), splitResult[6].split("=")[1]))
+                .catch(error => Fail(error));
             backupHost.value = splitResult[7].split("=")[1];
             backupPort.value = splitResult[8].split("=")[1];
-            backupIface.value = splitResult[9].split("=")[1];          
+            cockpit.script("/usr/local/share/h31proxy_deploy/scripts/cockpitScript.sh -i")
+                .then((content) => AddDropDown(backupIface, content.split("\n"), splitResult[9].split("=")[1]))
+                .catch(error => Fail(error));        
             atakHost.value = splitResult[10].split("=")[1];
             atakPort.value = splitResult[11].split("=")[1];
             enabled = (splitResult[12].split("=")[1] == "true");
@@ -67,12 +75,8 @@ function FailureReadFile(error) {
 
     losHost.value = "224.10.10.10";
     losPort.value = "14550";
-    losIface.value = "eth0";
     backupHost.value = "225.10.10.10";
     backupPort.value = "14560";
-    backupIface.value = "edge0";
-    fmuDevice.value = "/dev/ttyTHS1";
-    baudrate.value = "500000";
     fmuId.value = "1";
     atakHost.value = "239.2.3.1";
     atakPort.value = "6969";    
@@ -181,10 +185,9 @@ function Success() {
     result.innerHTML = "success";
 }
 
-function Fail() {
+function Fail(error) {
     result.style.color = "red";
-    result.innerHTML = "fail";
+    result.innerHTML = error.message;
 }
-
 // Send a 'init' message.  This tells integration tests that we are ready to go
 cockpit.transport.wait(function() { });
