@@ -25,10 +25,10 @@ const platform = document.getElementById("platform");
 const CONFIG_LENGTH = 24;
 
 
-const losBitrateArray = [ 500, 750, 1000, 1250, 1500, 1750, 2000, 2500, 3000, 3500, 4000, 4500, 5000 ];
+const losBitrateArray = [ "Disabled", "500", "750", "1000", "1250", "1500", "1750", "2000", "2500", "3000", "3500", "4000", "4500", "5000" ];
 // used for mav, atak, and video
-const serverBitrateArray = [ 250, 500, 750, 1000, 1250, 1500 ];
-const audioBitrateArray = [ 64, 128, 256 ];
+const serverBitrateArray = [ "Disabled", "250", "500", "750", "1000", "1250", "1500" ];
+const audioBitrateArray = [ "Disabled", "64", "128", "256" ];
 const widthAndHeightArray = [ "640x360", "960x540", "1280x720", "1920x1080", "2560x1440" ];
 const fpsArray = [ 15, 30 ];
 
@@ -134,6 +134,12 @@ function FailureReadFile(error) {
     platform.value = "NVID";
 }
 
+function CheckDisabled(disable){
+    if(disable == "Disabled"){
+        return "0";
+    }
+}
+
 function SaveSettings() {
     var splitDims = widthAndHeight.value.split("x");
 
@@ -143,25 +149,25 @@ function SaveSettings() {
         "LOS_WIDTH=" + splitDims[0] + "\n" +
         "LOS_HEIGHT=" + splitDims[1] + "\n" +
         "LOS_FPS=" + fps.value + "\n" +
-        "LOS_BITRATE=" + losBitrate.value + "\n" +
+        "LOS_BITRATE=" + CheckDisabled(losBitrate.value) + "\n" +
         "LOS_HOST=" + losHost.value + "\n" +
         "LOS_PORT=" + losPort.value + "\n" +
         "LOS_IFACE=" + losIface.value + "\n" +
         "MAVPN_HOST=" + mavHost.value + "\n" +
         "MAVPN_PORT=" + mavPort.value + "\n" +
         "MAVPN_IFACE=" + mavIface.value + "\n" +
-        "MAVPN_BITRATE=" + mavBitrate.value + "\n" +
+        "MAVPN_BITRATE=" + CheckDisabled(mavBitrate.value) + "\n" +
         "ATAK_HOST=" + atakHost.value + "\n" +
         "ATAK_PORT=" + atakPort.value + "\n" +
         "ATAK_IFACE=" + atakIface.value + "\n" +
-        "ATAK_BITRATE=" + atakBitrate.value + "\n" +
+        "ATAK_BITRATE=" + CheckDisabled(atakBitrate.value) + "\n" +
         "VIDEOSERVER_HOST=" + videoHost.value + "\n" +
         "VIDEOSERVER_PORT=" + videoPort.value + "\n" +
         "VIDEOSERVER_BITRATE=" + videoBitrate.value + "\n" +
         "VIDEOSERVER_ORG=" + videoOrg.value + "\n" +
         "VIDEOSERVER_STREAMNAME=" + videoName.value + "\n" +
         "AUDIO_PORT=" + audioPort.value + "\n" +
-        "AUDIO_BITRATE=" + audioBitrate.value + "\n" +
+        "AUDIO_BITRATE=" + CheckDisabled(audioBitrate.value) + "\n" +
         "PLATFORM=" + platform.value + "\n")
         .then(Success)
         .catch(error => Fail(new Error("Failure, settings NOT changed!")));

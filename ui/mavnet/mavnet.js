@@ -75,6 +75,22 @@ function AddPathToDeviceFile(incomingArray){
     return incomingArray;
 }
 
+function AddDropDown(box, theArray, defaultValue){
+    try{
+        for(let t = 0; t < theArray.length; t++){
+            var option = document.createElement("option");
+            option.text = theArray[t];
+            box.add(option);
+            if(defaultValue == option.text){
+                box.value = option.text;
+            }
+        }
+    }
+    catch(e){
+        Fail(e)
+    }
+}
+
 function FailureReadFile(error) {
     // Display error message
     output.innerHTML = "Error : " + error.message;
