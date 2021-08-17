@@ -47,10 +47,10 @@ function SuccessReadFile(content) {
         
         if(splitResult.length >= CONFIG_LENGTH) {
             cockpit.script("/usr/local/share/h31proxy_deploy/scripts/cockpitScript.sh -d")
-                .then((content) => AddDropDown(deviceH264, content.split("\n"), splitResult[1].split("=")[1]))
+                .then((content) => AddDropDown(deviceH264, AddPathToDeviceFile(content.split("\n")), splitResult[1].split("=")[1]))
                 .catch(error => Fail(error));
             cockpit.script("/usr/local/share/h31proxy_deploy/scripts/cockpitScript.sh -d")
-                .then((content) => AddDropDown(deviceX, content.split("\n"), splitResult[2].split("=")[1]))
+                .then((content) => AddDropDown(deviceX, AddPathToDeviceFile(content.split("\n")), splitResult[2].split("=")[1]))
                 .catch(error => Fail(error));
             AddDropDown(widthAndHeight, widthAndHeightArray, splitResult[3].split("=")[1] + "x" + splitResult[4].split("=")[1]);
             AddDropDown(fps, fpsArray, splitResult[5].split("=")[1]);
@@ -89,6 +89,13 @@ function SuccessReadFile(content) {
     catch(e){
         FailureReadFile(e);
     }
+}
+
+function AddPathToDeviceFile(incomingArray){
+    for(let t = 0; t < incomingArray.length; t++){
+        incomingArray[t] = "/dev/" + incomingArray[t];
+    }
+    return incomingArray;
 }
 
 function AddDropDown(box, theArray, defaultValue){

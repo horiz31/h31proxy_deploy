@@ -10,6 +10,10 @@ while [[ $# -gt 0 ]]; do
             ls /dev/ | grep video
             exit 0
             ;;
+        -s)
+            ls /dev/ | grep ttyTH
+            exit 0
+            ;;
         -i)
             basename -a /sys/class/net/*
             exit 0

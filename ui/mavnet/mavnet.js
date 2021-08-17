@@ -35,7 +35,7 @@ function SuccessReadFile(content) {
         
         if(splitResult.length >= CONFIG_LENGTH) {
             cockpit.script("/usr/local/share/h31proxy_deploy/scripts/cockpitScript.sh -s")
-                .then((content) => AddDropDown(fmuDevice, content.split("\n"), splitResult[1].split("=")[1]))
+                .then((content) => AddDropDown(fmuDevice, AddPathToDeviceFile(content.split("\n")), splitResult[1].split("=")[1]))
                 .catch(error => Fail(error));
             AddDropDown(baudrate, baudRateArray, splitResult[2].split("=")[1]);
             fmuId.value = splitResult[3].split("=")[1];
@@ -66,6 +66,13 @@ function SuccessReadFile(content) {
         document.getElementById("enable").innerHTML = "Disable";
         document.getElementById("the-table").hidden = false;
     }
+}
+
+function AddPathToDeviceFile(incomingArray){
+    for(let t = 0; t < incomingArray.length; t++){
+        incomingArray[t] = "/dev/" + incomingArray[t];
+    }
+    return incomingArray;
 }
 
 function FailureReadFile(error) {
