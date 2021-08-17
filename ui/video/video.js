@@ -1,7 +1,6 @@
 const deviceH264 = document.getElementById("deviceH264");
 const deviceX = document.getElementById("deviceX");
-const width = document.getElementById("width");
-const height = document.getElementById("height");
+const widthAndHeight = document.getElementById("widthAndHeight");
 const fps = document.getElementById("fps");
 const losBitrate = document.getElementById("losBitrate");
 const losHost = document.getElementById("losHost");
@@ -25,6 +24,14 @@ const audioBitrate = document.getElementById("audioBitrate");
 const platform = document.getElementById("platform");
 const CONFIG_LENGTH = 24;
 
+
+const losBitrateArray = [ 500, 750, 1000, 1250, 1500, 1750, 2000, 2500, 3000, 3500, 4000, 4500, 5000 ];
+// used for mav, atak, and video
+const serverBitrateArray = [ 250, 500, 750, 1000, 1250, 1500 ];
+const audioBitrateArray = [ 64, 128, 256 ];
+const widthAndHeightArray = [ "640x360", "960x540", "1280x720", "1920x1080", "2560x1440" ];
+const fpsArray = [ 15, 30 ];
+
 document.onload = InitPage();
 
 document.getElementById("save").addEventListener("click", SaveSettings);
@@ -39,30 +46,40 @@ function SuccessReadFile(content) {
         var splitResult = content.split("\n");
         
         if(splitResult.length >= CONFIG_LENGTH) {
-            deviceH264.value = splitResult[1].split("=")[1];
-            deviceX.value = splitResult[2].split("=")[1];
-            width.value = splitResult[3].split("=")[1];
-            height.value = splitResult[4].split("=")[1];
-            fps.value = splitResult[5].split("=")[1];
-            losBitrate.value = splitResult[6].split("=")[1];
+            cockpit.script("/usr/local/share/h31proxy_deploy/scripts/videoScript.sh -d")
+                .then((content) => AddDropDown(deviceH264, content.split("\n"), splitResult[1].split("=")[1]))
+                .catch(error => Fail(error));
+            cockpit.script("/usr/local/share/h31proxy_deploy/scripts/videoScript.sh -d")
+                .then((content) => AddDropDown(deviceX, content.split("\n"), splitResult[2].split("=")[1]))
+                .catch(error => Fail(error));
+            AddDropDown(widthAndHeight, widthAndHeightArray, splitResult[3].split("=")[1] + "x" + splitResult[4].split("=")[1]);
+            AddDropDown(fps, fpsArray, splitResult[5].split("=")[1]);
+            AddDropDown(losBitrate, losBitrateArray, splitResult[6].split("=")[1]);
             losHost.value = splitResult[7].split("=")[1];
             losPort.value = splitResult[8].split("=")[1];
-            losIface.value = splitResult[9].split("=")[1];
+            cockpit.script("/usr/local/share/h31proxy_deploy/scripts/videoScript.sh -i")
+                .then((content) => AddDropDown(losIface, content.split("\n"), splitResult[9].split("=")[1]))
+                .catch(error => Fail(error));
             mavHost.value = splitResult[10].split("=")[1];
             mavPort.value = splitResult[11].split("=")[1];
-            mavIface.value = splitResult[12].split("=")[1];
-            mavBitrate.value = splitResult[13].split("=")[1];
+            cockpit.script("/usr/local/share/h31proxy_deploy/scripts/videoScript.sh -i")
+                .then((content) => AddDropDown(mavIface, content.split("\n"), splitResult[12].split("=")[1]))
+                .catch(error => Fail(error));
+            AddDropDown(mavBitrate, serverBitrateArray, splitResult[13].split("=")[1]);
             atakHost.value = splitResult[14].split("=")[1];
             atakPort.value = splitResult[15].split("=")[1];
-            atakIface.value = splitResult[16].split("=")[1];
-            atakBitrate.value = splitResult[17].split("=")[1];
+            cockpit.script("/usr/local/share/h31proxy_deploy/scripts/videoScript.sh -i")
+                .then((content) => AddDropDown(atakIface, content.split("\n"), splitResult[16].split("=")[1]))
+                .catch(error => Fail(error));
+            // atakBitrateDefault = splitResult[17].split("=")[1];
+            AddDropDown(atakBitrate, serverBitrateArray, splitResult[17].split("=")[1]);
             videoHost.value = splitResult[18].split("=")[1];
             videoPort.value = splitResult[19].split("=")[1];
-            videoBitrate.value = splitResult[20].split("=")[1];
+            AddDropDown(videoBitrate, serverBitrateArray, splitResult[20].split("=")[1]);
             videoOrg.value = splitResult[21].split("=")[1];
             videoName.value = splitResult[22].split("=")[1];
             audioPort.value = splitResult[23].split("=")[1];
-            audioBitrate.value = splitResult[24].split("=")[1];
+            AddDropDown(audioBitrate, audioBitrateArray, splitResult[24].split("=")[1]);
             platform.value = splitResult[25].split("=")[1];
         }
         else{
@@ -74,45 +91,50 @@ function SuccessReadFile(content) {
     }
 }
 
+function AddDropDown(box, theArray, defaultValue){
+    try{
+        for(let t = 0; t < theArray.length; t++){
+            var option = document.createElement("option");
+            option.text = theArray[t];
+            box.add(option);
+            if(defaultValue == option.text){
+                box.value = option.text;
+            }
+        }
+    }
+    catch(e){
+        Fail(e)
+    }
+}
+
 function FailureReadFile(error) {
     // Display error message
     output.innerHTML = "Error : " + error.message;
 
     // Defaults
-    deviceH264.value = "/dev/video1";
-    deviceX.value = "/dev/video0"
-    width.value = "1280";
-    height.value = "720";
     fps.value = "30";
-    losBitrate.value = "3000";
     losHost.value = "224.11.";
     losPort.value = "5600";
-    losIface.value = "eth0";
     mavHost.value = "225.11.";
     mavPort.value = "5600";
-    mavIface.value = "edge0";
-    mavBitrate.value = "1000";
     atakHost.value = "239.10.";
     atakPort.value = "5600";
-    atakIface.value = "eth0";
-    atakBitrate.value = "500";
     videoHost.value = "video.horizon31.online";
     videoPort.value = "1935";
-    videoBitrate.value = "750";
     videoOrg.value = "H31";
     videoName.value = "NVID-serialnumber.py";
     audioPort.value = "5601"
-    audioBitrate.value = "128";
     platform.value = "NVID";
 }
 
 function SaveSettings() {
+    var splitDims = widthAndHeight.value.split("x");
 
     cockpit.file("/usr/local/share/h31proxy_deploy/video.conf").replace("[Service]\n" + 
         "DEVICE_H264=" + deviceH264.value + "\n" +
         "DEVICE_XRAW=" + deviceX.value + "\n" +
-        "LOS_WIDTH=" + width.value + "\n" +
-        "LOS_HEIGHT=" + height.value + "\n" +
+        "LOS_WIDTH=" + splitDims[0] + "\n" +
+        "LOS_HEIGHT=" + splitDims[1] + "\n" +
         "LOS_FPS=" + fps.value + "\n" +
         "LOS_BITRATE=" + losBitrate.value + "\n" +
         "LOS_HOST=" + losHost.value + "\n" +
@@ -135,7 +157,7 @@ function SaveSettings() {
         "AUDIO_BITRATE=" + audioBitrate.value + "\n" +
         "PLATFORM=" + platform.value + "\n")
         .then(Success)
-        .catch(Fail);
+        .catch(error => Fail(new Error("Failure, settings NOT changed!")));
 
     cockpit.spawn(["systemctl", "restart", "video"]);
     cockpit.spawn(["systemctl", "restart", "h31proxy"]);
@@ -146,9 +168,9 @@ function Success() {
     result.innerHTML = "Success, video and telemetry restarting...";
 }
 
-function Fail() {
+function Fail(error) {
     result.style.color = "red";
-    result.innerHTML = "Failure, settings NOT changed!";
+    result.innerHTML = error.message;
 }
 
 // Send a 'init' message.  This tells integration tests that we are ready to go

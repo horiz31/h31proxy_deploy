@@ -18,30 +18,30 @@
                         <caption>The PixC4-Jetson provides multiple video and audio streams. You can change the parameters for each below. To disable a stream, enter 0 for the birate.</caption>
                         <tr>
                             <td><label class="control-label" for="deivceH264">Device H264</label></td>
-                            <td><input id="deviceH264"></td>
+                            <td><select id="deviceH264"></select></td>
                         </tr>
                         
                         <tr">
                             <td><label class="control-label" for="deivceX">Device XRaw</label></td>
-                            <td><input id="deviceX"></td>
+                            <td><select id="deviceX"></select></td>
                         </tr>
                         
                         <tr>
-                            <td><label class="control-label" for="width">Frame Width</label></td>
-                            <td><input id="width" ></td>
+                            <td><label class="control-label" for="width">Frame Width and Height</label></td>
+                            <td><select id="widthAndHeight" ></select></td>
                         </tr>
-                        <tr>
+                        <!-- <tr>
                             <td><label class="control-label" for="height">Frame Height</label></td>
                             <td><input id="height"></td>
-                        </tr>
+                        </tr> -->
                         <tr>
                             <td><label class="control-label" for="fps">Frames Per Second</label></td>
-                            <td><input id="fps"></td>
+                            <td><select id="fps"></select></td>
                         </tr>
                         <tr><td colspan="2"><p class="fw-bold fs-5 mt-3">Primary Video Stream Encoding</p><p class="fw-light fs-6">This stream is used for video over the primary low-latency and high-bandwdith radio link. Typical bitrates are 1000-4000 kpbs. </p></td></tr>
                         <tr>
                             <td><label class="control-label" for="losBitrate">Bitrate</label></td>
-                            <td><input id="losBitrate"></td>
+                            <td><select id="losBitrate"></select></td>
                         </tr>
                         <tr>
                             <td><label class="control-label" for="losHost">Host</label></td>
@@ -53,12 +53,12 @@
                         </tr>
                         <tr>
                             <td><label class="control-label" for="losIface">Interface</label></td>
-                            <td><input id="losIface"></td>
+                            <td><select id="losIface"></select></td>
                         </tr>
                         <tr><td colspan="2"><p class="fw-bold fs-5 mt-3">Backup MAVPN Video Stream Encoding</p><p class="fw-light fs-6">This stream is used for video over the secondary link via the MAVPN connection, which is typically a lower-bandwith link like cellular. Typical bitrates are 800-2000 kpbs. </p></td></tr>
                         <tr>
                             <td><label class="control-label" for="mavBitrate">Bitrate</label></td>
-                            <td><input id="mavBitrate"></td>
+                            <td><select id="mavBitrate"></select></td>
                         </tr>
                         <tr>
                             <td><label class="control-label" for="mavHost">Host</label></td>
@@ -70,12 +70,12 @@
                         </tr>
                         <tr>
                             <td><label class="control-label" for="mavIface">Interface</label></td>
-                            <td><input id="mavIface"></td>
+                            <td><select id="mavIface"></select></td>
                         </tr>
                         <tr><td colspan="2"><p class="fw-bold fs-5 mt-3">ATAK Stream Encoding</p><p class="fw-light fs-6">This stream is used for video to the TAK network. These streams are typically used on small screens. Typical bitrates are 500-1000 kpbs. </p></td></tr>
                         <tr>
                             <td><label class="control-label" for="atakBitrate">Bitrate</label></td>
-                            <td><input id="atakBitrate"></td>
+                            <td><select id="atakBitrate"></select></td>
                         </tr>
                         <tr>
                             <td><label class="control-label" for="atakHost">Host</label></td>
@@ -87,12 +87,12 @@
                         </tr>
                         <tr>
                             <td><label class="control-label" for="atakIface">Interface</label></td>
-                            <td><input id="atakIface"></td>
+                            <td><select id="atakIface"></select></td>
                         </tr>
                         <tr><td colspan="2"><p class="fw-bold fs-5 mt-3">MAVNet Video Server Stream Encoding</p><p class="fw-light fs-6">This stream is sent to the MAVNet cloud video distribution server and display on the webGCS user interfaces. It uses the link which provides an Internet route (typically cellular). Consider that total cellular bandwidth usage is this stream combined with the MAVPN stream. Typical bitrates are 500-1500 kbps.</p></td></tr>
                         <tr>
                             <td><label class="control-label" for="videoBitrate">Bitrate</label></td>
-                            <td><input id="videoBitrate"></td>
+                            <td><select id="videoBitrate"></select></td>
                         </tr>
                         <tr>
                             <td><label class="control-label" for="videoHost">Server Address</label></td>
@@ -113,7 +113,7 @@
                         <tr><td colspan="2"><p class="fw-bold fs-5 mt-3">Audio Stream Encoding</p><p class="fw-light fs-6">The audio encoding information below is used for both the primary link and the backup link. Typical bitrate is 128 kbps.</p></td></tr>
                         <tr>
                             <td><label class="control-label" for="audioBitrate">Bitrate</label></td>
-                            <td><input id="audioBitrate"></td>
+                            <td><select id="audioBitrate"></select></td>
                         </tr>
                         <tr>
                             <td><label class="control-label" for="audioPort">Port</label></td>
