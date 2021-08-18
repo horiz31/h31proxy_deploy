@@ -55,6 +55,8 @@ function SaveSettings() {
     cockpit.file("/usr/local/share/h31proxy_deploy/cellular.conf").replace(fileString)
         .then(Success)
         .catch(Fail);
+
+    cockpit.script("/usr/local/share/h31proxy_deploy/scripts/cockpitScript.sh -a " + apn.value);
 }
 
 function Success() {
