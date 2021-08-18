@@ -4,7 +4,8 @@
     "menu": {
         "mav-server": {
             "label": "MAVNet Server Configuration",
-            "path": "server.html"
+            "path": "server.html",
+            "order": 2
         }
     }
 }

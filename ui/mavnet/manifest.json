@@ -4,7 +4,8 @@
     "menu": {
         "mavnet": {
             "label": "H31 Proxy Configuration",
-            "path": "mavnet.html"
+            "path": "mavnet.html",
+            "order": 1
         }
     }
 }

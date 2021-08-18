@@ -4,7 +4,8 @@
     "menu": {
         "mavnet": {
             "label": "Cellular Configuration",
-            "path": "cellular.html"
+            "path": "cellular.html",
+            "order": 4
         }
     }
 }

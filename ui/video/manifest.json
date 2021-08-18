@@ -4,7 +4,8 @@
     "menu": {
         "video": {
             "label": "Video Configuration",
-            "path": "video.html"
+            "path": "video.html",
+            "order": 3
         }
     }
 }
