@@ -18,13 +18,11 @@ function InitPage() {
 
 function SuccessReadFile(content) {
     try{
-        var splitResult = content.split("\n");
-        
-        if(splitResult.length >= CONFIG_LENGTH) {
-            apn.value = splitResult[1].split("=")[1];
+        if(content.length > 0) {
+            apn.value = content;
         }
         else{
-            FailureReadFile(new Error("To few parameters in file"));
+            FailureReadFile(new Error("Not APN found"));
         }
     }
     catch(e){
@@ -51,12 +49,6 @@ function EnableButtonClicked() {
 }
 
 function SaveSettings() {
-    var fileString = "[Service]\n" + 
-        "APN=" + apn.value + "\n" +
-
-    cockpit.file("/usr/local/share/h31proxy_deploy/cellular.conf").replace(fileString)
-        .then(Success)
-        .catch(Fail);
 
     cockpit.script("/usr/local/share/h31proxy_deploy/scripts/cockpitScript.sh -a " + apn.value);
 }
