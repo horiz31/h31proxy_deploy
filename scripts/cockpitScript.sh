@@ -12,6 +12,8 @@ function ApnChange
 
 while [[ $# -gt 0 ]]; do 
     key="$1"
+    shift
+    shift
 
     case $key in
         -a)
