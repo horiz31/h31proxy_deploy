@@ -9,9 +9,11 @@ document.getElementById("save").addEventListener("click", SaveSettings);
 // This attempts to read the conf file, if it exists, then it will parse it and fill out the table
 // if it fails then the values are loaded with defaults.
 function InitPage() {
-    cockpit.file("/usr/local/share/h31proxy_deploy/cellular.conf")
-        .read().then((content, tag) => SuccessReadFile(content))
-            .catch(error => FailureReadFile(error));
+    
+    cockpit.script("/usr/local/share/h31proxy_deploy/scripts/cockpitScript.sh -c")
+                .then((content) => SuccessReadFile(content))
+                .catch(error => FailureReadFile(error));
+    
 }
 
 function SuccessReadFile(content) {
@@ -35,7 +37,7 @@ function FailureReadFile(error) {
     output.innerHTML = "Error : " + error.message;
     // TODO :: Defaults should go here.
 
-    apn.value = "11111111111";
+    apn.value = "broadband";
 }
 
 // The callback on the enable button
