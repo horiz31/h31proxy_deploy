@@ -18,15 +18,23 @@ while [[ $# -gt 0 ]]; do
     case $key in
         -a)
             ApnChange $1
+            exit 0
             ;;
         -d)
             ls /dev/ | grep video
+            exit 0
             ;;
         -s)
             ls /dev/ | grep ttyTH
+            exit 0
             ;;
         -i)
             basename -a /sys/class/net/*
+            exit 0
+            ;;
+        -c)
+            nmcli con show attcell | grep gsm.apn | cut -d ":" -f2 | xargs
+            exit 0
             ;;
     esac
     exit 0
