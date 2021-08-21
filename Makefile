@@ -72,9 +72,9 @@ install: dependencies
 	@$(SUDO) cp -rf ui/video/* /usr/share/cockpit/video/
 	@$(SUDO) mkdir /usr/share/cockpit/cellular
 	@$(SUDO) cp -rf ui/cellular/* /usr/share/cockpit/cellular/
-	@$(SUDO) cp -f ui/branding-ubuntu/* /usr/share/cockpit/branding/ubuntu/
-	@$(SUDO) cp -f ui/static/* /usr/share/cockpit/static/	
-	@$(SUDO) cp -f ui/base1/ /usr/share/cockpit/base1/
+	@$(SUDO) cp -rf ui/branding-ubuntu/* /usr/share/cockpit/branding/ubuntu/
+	@$(SUDO) cp -rf ui/static/* /usr/share/cockpit/static/	
+	@$(SUDO) cp -rf ui/base1/ /usr/share/cockpit/base1/
 	# below needs to be reworked. Suggest we either move config files to a location that can be accessed without sudo or give the current user write access to the config folder during install
 #	@$(SUDO) ln -sf /usr/local/share/h31proxy_deploy/h31proxy.conf /etc/systemd/h31proxy.conf
 #	@$(SUDO) ln -sf /usr/local/share/h31proxy_deploy/mavnet.conf /etc/systemd/mavnet.conf
