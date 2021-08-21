@@ -27,4 +27,5 @@ while [[ $# -gt 0 ]]; do
             basename -a /sys/class/net/*
             ;;
     esac
+    exit(0)
 done
