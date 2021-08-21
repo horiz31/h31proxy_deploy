@@ -63,13 +63,14 @@ install: dependencies
 	@$(MAKE) --no-print-directory -B $(SYSCFG)/h31proxy.conf
 	@$(MAKE) --no-print-directory -B $(SYSCFG)/mavnet.conf
 	@$(MAKE) --no-print-directory enable
-	@$(SUDO) rm -rf /usr/share/cockpit/mavnet/ /usr/share/cockpit/mavnet-server/ /usr/share/cockpit/video/
+	@$(SUDO) rm -rf /usr/share/cockpit/mavnet/ /usr/share/cockpit/mavnet-server/ /usr/share/cockpit/video/ /usr/share/cockpit/cellular
 	@$(SUDO) mkdir /usr/share/cockpit/mavnet/
 	@$(SUDO) cp -rf ui/mavnet/* /usr/share/cockpit/mavnet/
 	@$(SUDO) mkdir /usr/share/cockpit/mavnet-server/
 	@$(SUDO) cp -rf ui/mavnet-server/* /usr/share/cockpit/mavnet-server/
 	@$(SUDO) mkdir /usr/share/cockpit/video/
 	@$(SUDO) cp -rf ui/video/* /usr/share/cockpit/video/
+	@$(SUDO) mkdir /usr/share/cockpit/cellular
 	@$(SUDO) cp -rf ui/cellular/* /usr/share/cockpit/cellular/
 	@$(SUDO) cp -f ui/branding-ubuntu/* /usr/share/cockpit/branding/ubuntu/
 	@$(SUDO) cp -f ui/static/* /usr/share/cockpit/static/	
