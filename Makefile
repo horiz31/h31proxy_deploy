@@ -7,12 +7,13 @@ SUDO := $(shell test $${EUID} -ne 0 && echo "sudo")
 
 SERIAL ?= $(shell python3 serial_number.py)
 LOCAL=/usr/local
-LOCAL_SCRIPTS=scripts/start-h31proxy.sh
+LOCAL_SCRIPTS=scripts/start-h31proxy.sh scripts/cockpitScript.sh
 CONFIG ?= /var/local
 LIBSYSTEMD=/lib/systemd/system
 PKGDEPS ?= cockpit 
 SERVICES=h31proxy.service
-SYSCFG=/etc/systemd
+#SYSCFG=/etc/systemd
+SYSCFG=/usr/local/h31/conf
 DRY_RUN=false
 PLATFORM ?= $(shell python serial_number.py | cut -c1-4)
 
@@ -55,14 +56,6 @@ enable:
 	@echo ""
 
 install: dependencies	
-	@$(MAKE) --no-print-directory disable
-	@[ -d $(LOCAL)/bin/h31proxy ] || mkdir $(LOCAL)/bin/h31proxy
-	@$(SUDO) cp -a bin/. $(LOCAL)/bin/h31proxy/
-	@$(SUDO) chmod +x $(LOCAL)/bin/h31proxy/h31proxy.net
-	@for s in $(LOCAL_SCRIPTS) ; do $(SUDO) install -Dm755 $${s} $(LOCAL)/bin/$${s} ; done
-	@$(MAKE) --no-print-directory -B $(SYSCFG)/h31proxy.conf
-	@$(MAKE) --no-print-directory -B $(SYSCFG)/mavnet.conf
-	@$(MAKE) --no-print-directory enable
 	@$(SUDO) rm -rf /usr/share/cockpit/mavnet/ /usr/share/cockpit/mavnet-server/ /usr/share/cockpit/video/ /usr/share/cockpit/cellular
 	@$(SUDO) mkdir /usr/share/cockpit/mavnet/
 	@$(SUDO) cp -rf ui/mavnet/* /usr/share/cockpit/mavnet/
@@ -75,10 +68,18 @@ install: dependencies
 	@$(SUDO) cp -rf ui/branding-ubuntu/* /usr/share/cockpit/branding/ubuntu/
 	@$(SUDO) cp -rf ui/static/* /usr/share/cockpit/static/	
 	@$(SUDO) cp -rf ui/base1/ /usr/share/cockpit/base1/
-# 	@below needs to be reworked. Suggest we either move config files to a location that can be accessed without sudo or give the current user write access to the config folder during install
-#	@$(SUDO) ln -sf /usr/local/share/h31proxy_deploy/h31proxy.conf /etc/systemd/h31proxy.conf
-#	@$(SUDO) ln -sf /usr/local/share/h31proxy_deploy/mavnet.conf /etc/systemd/mavnet.conf
-#	@$(SUDO) ln -sf /usr/local/share/h31proxy_deploy/video.conf /etc/systemd/video.conf
+	@[ -d $(LOCAL)/h31 ] || $(SUDO) mkdir $(LOCAL)/h31
+	@for s in $(RULES) ; do $(SUDO) install -Dm644 $${s%.*}.rules $(UDEVRULES)/$${s%.*}.rules ; done
+	@if [ ! -z "$(RULES)" ] ; then $(SUDO) udevadm control --reload-rules && udevadm trigger ; fi
+	@for s in $(LOCAL_SCRIPTS) ; do $(SUDO) install -Dm755 $${s} $(LOCAL)/h31/$${s} ; done
+	@for c in stop disable ; do $(SUDO) systemctl $${c} $(SERVICES) ; done ; true
+	@[ -d $(LOCAL)/h31/h31proxy ] || $(SUDO) mkdir $(LOCAL)/h31/h31proxy
+	@$(SUDO) cp -a bin/. $(LOCAL)/h31/h31proxy/
+	@$(SUDO) chmod +x $(LOCAL)/h31/h31proxy/h31proxy.net
+	@for s in $(SERVICES) ; do $(SUDO) install -Dm644 $${s%.*}.service $(LIBSYSTEMD)/$${s%.*}.service ; done
+	@if [ ! -z "$(SERVICES)" ] ; then $(SUDO) systemctl daemon-reload ; fi
+	@for s in $(SERVICES) ; do $(SUDO) systemctl enable $${s%.*} ; done
+	@$(SUDO) chown -R h31 /usr/local/h31
 
 provision:
 	@$(MAKE) --no-print-directory -B $(SYSCFG)/h31proxy.conf

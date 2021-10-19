@@ -1,3 +1,5 @@
+const scriptLocation = "/usr/local/h31/"
+const confLocation = "/usr/local/h31/conf/"
 const losHost = document.getElementById("losHost");
 const losPort = document.getElementById("losPort");
 const losIface = document.getElementById("losIface");
@@ -24,7 +26,7 @@ document.getElementById("save").addEventListener("click", SaveSettings);
 // This attempts to read the conf file, if it exists, then it will parse it and fill out the table
 // if it fails then the values are loaded with defaults.
 function InitPage() {
-    cockpit.file("/usr/local/share/h31proxy_deploy/h31proxy.conf")
+    cockpit.file(confLocation + "h31proxy.conf")
         .read().then((content, tag) => SuccessReadFile(content))
             .catch(error => FailureReadFile(error));
 }
@@ -34,19 +36,19 @@ function SuccessReadFile(content) {
         var splitResult = content.split("\n");
         
         if(splitResult.length >= CONFIG_LENGTH) {
-            cockpit.script("/usr/local/share/h31proxy_deploy/scripts/cockpitScript.sh -s")
+            cockpit.script(scriptLocation + "cockpitScript.sh -s")
                 .then((content) => AddDropDown(fmuDevice, AddPathToDeviceFile(content.split("\n")), splitResult[1].split("=")[1]))
                 .catch(error => Fail(error));
             AddDropDown(baudrate, baudRateArray, splitResult[2].split("=")[1]);
             fmuId.value = splitResult[3].split("=")[1];
             losHost.value = splitResult[4].split("=")[1];
             losPort.value = splitResult[5].split("=")[1];
-            cockpit.script("/usr/local/share/h31proxy_deploy/scripts/cockpitScript.sh -i")
+            cockpit.script(scriptLocation + "cockpitScript.sh -i")
                 .then((content) => AddDropDown(losIface, content.split("\n"), splitResult[6].split("=")[1]))
                 .catch(error => Fail(error));
             backupHost.value = splitResult[7].split("=")[1];
             backupPort.value = splitResult[8].split("=")[1];
-            cockpit.script("/usr/local/share/h31proxy_deploy/scripts/cockpitScript.sh -i")
+            cockpit.script(scriptLocation + "cockpitScript.sh -i")
                 .then((content) => AddDropDown(backupIface, content.split("\n"), splitResult[9].split("=")[1]))
                 .catch(error => Fail(error));        
             atakHost.value = splitResult[10].split("=")[1];
@@ -135,7 +137,7 @@ function EnableService(){
         "ATAK_PORT=" + atakPort.value + "\n" +
         "ENABLED=" + enabled.toString() + "\n";
 
-    cockpit.file("/usr/local/share/h31proxy_deploy/h31proxy.conf").replace(fileString)
+    cockpit.file(confLocation + "h31proxy.conf").replace(fileString)
         .then(CreateSystemDService).catch(error => {output.innerHTML = error.message});
 }
 
@@ -168,7 +170,7 @@ function DisableService(){
         "ATAK_PORT=" + atakPort.value + "\n" +
         "ENABLED=" + enabled.toString() + "\n";
 
-    cockpit.file("/usr/local/share/h31proxy_deploy/h31proxy.conf").replace(fileString)
+    cockpit.file(confLocation + "h31proxy.conf").replace(fileString)
         .then(RemoveSystemLinks).catch(error => {output.innerHTML = error.message});
 }
 
@@ -196,7 +198,7 @@ function SaveSettings() {
         "ATAK_PORT=" + atakPort.value + "\n" +
         "ENABLED=" + enabled.toString() + "\n";
 
-    cockpit.file("/usr/local/share/h31proxy_deploy/h31proxy.conf").replace(fileString)
+    cockpit.file(confLocation + "h31proxy.conf").replace(fileString)
         .then(Success)
         .catch(Fail);
 

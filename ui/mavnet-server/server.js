@@ -1,3 +1,4 @@
+const confLocation = "/usr/local/h31/conf/"
 const serialNum = document.getElementById("serialNum");
 const deviceTok = document.getElementById("deviceTok");
 const serverUrl = document.getElementById("serverUrl");
@@ -10,7 +11,7 @@ document.getElementById("save").addEventListener("click", SaveSettings);
 document.onload = InitPage();
 
 function InitPage() {
-    cockpit.file("/usr/local/share/h31proxy_deploy/mavnet.conf").read().then((content, tag) => SuccessReadFile(content))
+    cockpit.file(confLocation + "mavnet.conf").read().then((content, tag) => SuccessReadFile(content))
     .catch(error => FailureReadFile(error));
 }
 
@@ -37,15 +38,15 @@ function FailureReadFile(error) {
     output.innerHTML = "Error : " + error.message;
 
     // Defaults
-    serialNum.value = "987654321";
+    serialNum.value = "123456789";
     deviceTok.value = "";
-    serverUrl.value = "https://mavnet.online";
+    serverUrl.value = "https://gcs.horizon31.com";
 
 }
 
 function SaveSettings() {
 
-    cockpit.file("/usr/local/share/h31proxy_deploy/mavnet.conf").replace("[Service]\n" + 
+    cockpit.file(confLocation + "mavnet.conf").replace("[Service]\n" + 
         "SERIAL_NUMBER=" + serialNum.value + "\n" +
         "DEVICE_TOKEN=" + deviceTok.value + "\n" +
         "SERVER_ADDRESS=" + serverUrl.value + "\n")

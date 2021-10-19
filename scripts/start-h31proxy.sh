@@ -7,7 +7,7 @@
 
 SUDO=$(test ${EUID} -ne 0 && which sudo)
 LOCAL=/usr/local
-CONFIG_DIR=/etc/systemd
+CONFIG_DIR=/usr/local/h31/conf
 echo "Starting H31Proxy.net"
 
 cd ${LOCAL}/bin/h31proxy/ && ./h31proxy.net ${CONFIG_DIR}/h31proxy.conf ${CONFIG_DIR}/mavnet.conf ${CONFIG_DIR}/video.conf

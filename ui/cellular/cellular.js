@@ -1,3 +1,5 @@
+const scriptLocation = "/usr/local/h31/"
+const confLocation = "/usr/local/h31/conf/"
 const apn = document.getElementById("apn");
 const CONFIG_LENGTH = 1;
 
@@ -10,7 +12,7 @@ document.getElementById("save").addEventListener("click", SaveSettings);
 // if it fails then the values are loaded with defaults.
 function InitPage() {
     
-    cockpit.script("/usr/local/share/h31proxy_deploy/scripts/cockpitScript.sh -c")
+    cockpit.script(scriptLocation + "cockpitScript.sh -c")
                 .then((content) => SuccessReadFile(content))
                 .catch(error => FailureReadFile(error));
     
@@ -50,7 +52,7 @@ function EnableButtonClicked() {
 
 function SaveSettings() {
 
-    cockpit.script("/usr/local/share/h31proxy_deploy/scripts/cockpitScript.sh -a " + apn.value);
+    cockpit.script(scriptLocation + "cockpitScript.sh -a " + apn.value);
 }
 
 function Success() {
