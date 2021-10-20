@@ -99,8 +99,10 @@ if $DRY_RUN ; then
 	set +x
 	echo $CONF && cat /tmp/$$.env && echo ""
 elif [[ $(basename $CONF) == *.sh ]] ; then
+	mkdir -p $SYSCFG
 	$SUDO install -Dm755 /tmp/$$.env $CONF
 else
+	mkdir -p $SYSCFG
 	$SUDO install -Dm644 /tmp/$$.env $CONF
 fi
 rm /tmp/$$.env
