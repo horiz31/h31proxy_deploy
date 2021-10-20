@@ -1,4 +1,4 @@
-const scriptLocation = "/usr/local/h31/"
+const scriptLocation = "/usr/local/h31/scripts/"
 const confLocation = "/usr/local/h31/conf/"
 const deviceH264 = document.getElementById("deviceH264");
 const deviceX = document.getElementById("deviceX");

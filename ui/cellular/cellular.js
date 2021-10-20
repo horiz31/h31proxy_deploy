@@ -1,4 +1,4 @@
-const scriptLocation = "/usr/local/h31/"
+const scriptLocation = "/usr/local/h31/scripts/"
 const confLocation = "/usr/local/h31/conf/"
 const apn = document.getElementById("apn");
 const CONFIG_LENGTH = 1;

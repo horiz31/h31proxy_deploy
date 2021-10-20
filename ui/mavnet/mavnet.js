@@ -1,4 +1,4 @@
-const scriptLocation = "/usr/local/h31/"
+const scriptLocation = "/usr/local/h31/scripts/"
 const confLocation = "/usr/local/h31/conf/"
 const losHost = document.getElementById("losHost");
 const losPort = document.getElementById("losPort");
@@ -78,7 +78,7 @@ function AddPathToDeviceFile(incomingArray){
 }
 
 function AddDropDown(box, theArray, defaultValue){
-    try{
+    try{    
         for(let t = 0; t < theArray.length; t++){
             var option = document.createElement("option");
             option.text = theArray[t];
