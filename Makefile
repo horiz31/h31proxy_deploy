@@ -68,6 +68,9 @@ install: dependencies
 	@$(SUDO) cp -rf ui/branding-ubuntu/* /usr/share/cockpit/branding/ubuntu/
 	@$(SUDO) cp -rf ui/static/* /usr/share/cockpit/static/	
 	@$(SUDO) cp -rf ui/base1/* /usr/share/cockpit/base1/
+	@$(SUDO) apt install nano
+	@$(SUDO) apt install nload
+	@$(SUDO) apt install htop
 	@[ -d $(LOCAL)/h31 ] || $(SUDO) mkdir $(LOCAL)/h31
 	@for s in $(RULES) ; do $(SUDO) install -Dm644 $${s%.*}.rules $(UDEVRULES)/$${s%.*}.rules ; done
 	@if [ ! -z "$(RULES)" ] ; then $(SUDO) udevadm control --reload-rules && udevadm trigger ; fi
