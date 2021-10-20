@@ -80,6 +80,9 @@ install: dependencies
 	@if [ ! -z "$(SERVICES)" ] ; then $(SUDO) systemctl daemon-reload ; fi
 	@for s in $(SERVICES) ; do $(SUDO) systemctl enable $${s%.*} ; done
 	@$(SUDO) chown -R h31 /usr/local/h31
+	@$(SUDO) sed -i 's/9090/443/g' /lib/systemd/system/cockpit.socket
+	@$(SUDO) systemctl daemon-reload
+	@$(SUDO) systemctl restart cockpit.socket
 
 provision:
 	@$(MAKE) --no-print-directory -B $(SYSCFG)/h31proxy.conf
