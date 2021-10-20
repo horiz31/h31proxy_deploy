@@ -4,7 +4,7 @@ After=network.target
 RequiresMountsFor=/etc /usr
 
 [Service]
-ExecStart=/usr/local/h31/start-h31proxy.sh
+ExecStart=/usr/local/h31/scripts/start-h31proxy.sh
 EnvironmentFile=/usr/local/h31/conf/h31proxy.conf
 RuntimeDirectory=h31proxy
 RuntimeDirectoryMode=0755
