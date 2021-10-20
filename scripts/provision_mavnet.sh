@@ -1,7 +1,7 @@
 #!/bin/bash
 
 SUDO=$(test ${EUID} -ne 0 && which sudo)
-SYSCFG=/etc/systemd
+SYSCFG=/usr/local/h31/conf
 UDEV_RULESD=/etc/udev/rules.d
 HW_SERIAL_NUMBER=$(python serial_number.py | cut -c1-16)
 
@@ -85,8 +85,10 @@ if $DRY_RUN ; then
 	set +x
 	echo $CONF && cat /tmp/$$.env && echo ""
 elif [[ $(basename $CONF) == *.sh ]] ; then
+	mkdir -p $CONF
 	$SUDO install -Dm755 /tmp/$$.env $CONF
 else
+	mkdir -p $CONF
 	$SUDO install -Dm644 /tmp/$$.env $CONF
 fi
 rm /tmp/$$.env
