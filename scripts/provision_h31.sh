@@ -1,7 +1,7 @@
 #!/bin/bash
 
 SUDO=$(test ${EUID} -ne 0 && which sudo)
-SYSCFG=/etc/systemd
+SYSCFG=/usr/local/h31/conf
 UDEV_RULESD=/etc/udev/rules.d
 
 # expect to pass the path to the config file
