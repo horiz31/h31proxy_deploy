@@ -4,6 +4,7 @@ After=network.target multi-user.target
 RequiresMountsFor=/etc /usr
 
 [Service]
+ExecStartPre=/bin/sleep 5
 ExecStart=/usr/local/h31/scripts/start-h31proxy.sh
 RuntimeDirectory=h31proxy
 RuntimeDirectoryMode=0755
