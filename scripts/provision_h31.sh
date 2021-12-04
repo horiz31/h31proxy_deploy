@@ -74,6 +74,15 @@ case "$(basename $CONF)" in
 			ATAK_HOST=$(interactive "$ATAK_HOST" "ATAK_HOST, Multicast address for ATAK CoT messages")	
 			ATAK_PORT=$(interactive "$ATAK_PORT" "ATAK_PORT, Port for where to send the ATAK CoT messages")					
 		fi	
+		
+		if [ "${FMU_SERIAL}" == "/dev/ttyTHS1" ] ; then
+			$SUDO systemctl stop nvgetty && \
+			$SUDO systemctl disable nvgetty
+		fi
+		if [ -c ${FMU_SERIAL} ] ; then
+			$SUDO chown root:dialout ${FMU_SERIAL} && \
+			$SUDO chmod 660 ${FMU_SERIAL}
+		fi
 		echo "[Service]" > /tmp/$$.env && \
 		echo "FMU_SERIAL=${FMU_SERIAL}" >> /tmp/$$.env && \
 		echo "FMU_BAUDRATE=${FMU_BAUDRATE}" >> /tmp/$$.env && \
