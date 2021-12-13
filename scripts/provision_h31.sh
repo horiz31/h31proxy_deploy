@@ -50,10 +50,10 @@ function contains {
 
 case "$(basename $CONF)" in
 	h31proxy.conf)	
-		LOS_HOST=$(value_of LOS_HOST 224.10.10.10)	
+		LOS_HOST=$(value_of LOS_HOST 172.20.1.100)	
 		LOS_PORT=$(value_of LOS_PORT 14550)
 		LOS_IFACE=$(value_of LOS_IFACE eth0)
-		BACKUP_HOST=$(value_of BACKUP_HOST 225.10.10.10)
+		BACKUP_HOST=$(value_of BACKUP_HOST 172.21.1.100)
 		BACKUP_PORT=$(value_of BACKUP_PORT 14560)
 		BACKUP_IFACE=$(value_of BACKUP_IFACE edge0)
 		FMU_SERIAL=$(value_of FMU_SERIAL /dev/ttyTHS1)
