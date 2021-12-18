@@ -1,0 +1,10 @@
+{
+    "version": 0,
+
+    "menu": {
+        "software-update": {
+            "label": "Software Update",
+            "path": "h31-update.html"
+        }
+    }
+}
