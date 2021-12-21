@@ -39,9 +39,8 @@ function UploadFiles(file) {
     }));
 
     // Opens a "channel" to cockpit in order to start writing file
-    const ws = new WebSocket("ws://" + window.location.host + 
-        "/cockpit/channel/" + cockpit.transport.csrf_token + "?" + query);
-
+    const ws = new WebSocket("wss://" + window.location.host + 
+       	"/cockpit/channel/" + cockpit.transport.csrf_token + "?" + query);
     ws.onopen = function() {
         ws.binaryType = "arraybuffer";
         const reader = file.stream().getReader();
@@ -100,9 +99,10 @@ function sleep(ms) {
 }
 
 function Update(name) {
-    installProcess = cockpit.spawn(["mender", "-install", "/tmp/" + name]);
+    installProcess = cockpit.spawn(["mender", "--log-file", "/tmp/mender.log", "install", "/tmp/" + name], {superuser: "try" });
     installProcess.stream(outputData => {
         document.getElementById("output-box").innerText = outputData;
+	console.log(outputData);
     });
     // After
     installProcess.then(lastData => {
@@ -116,7 +116,7 @@ function Update(name) {
 }
 
 function CommitFunc() {
-    commitProcess = cockpit.spawn(["mender", "-commit"]);
+    commitProcess = cockpit.spawn(["mender", "commit"]);
     commitProcess.stream(outputData => {
         document.getElementById("output-box").innerText = outputData;
     });

@@ -3,8 +3,9 @@
 
     "menu": {
         "software-update": {
-            "label": "Software Update",
-            "path": "h31-update.html"
+            "label": "H31 Update",
+            "path": "h31-update.html",
+	    "content-security-policy": "default-src 'self'; connect-src 'self' wss:"
         }
     }
 }

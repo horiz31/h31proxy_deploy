@@ -68,6 +68,7 @@ install: dependencies
 	@$(SUDO) cp -rf ui/branding-ubuntu/* /usr/share/cockpit/branding/ubuntu/
 	@$(SUDO) cp -rf ui/static/* /usr/share/cockpit/static/	
 	@$(SUDO) cp -rf ui/base1/* /usr/share/cockpit/base1/
+	@$(SUDO) mkdir -p /usr/share/cockpit/h31-update/
 	@$(SUDO) cp -rf ui/h31-update/* /usr/share/cockpit/h31-update/
 	@$(SUDO) apt install nano
 	@$(SUDO) apt install nload
