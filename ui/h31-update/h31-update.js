@@ -99,33 +99,33 @@ function sleep(ms) {
 }
 
 function Update(name) {
-    installProcess = cockpit.spawn(["mender", "--log-file", "/tmp/mender.log", "install", "/tmp/" + name], {superuser: "try" });
+    installProcess = cockpit.spawn(["mender", "--log-file", "/tmp/mender.log", "install", "/tmp/" + name], { superuser: "try" });
     installProcess.stream(outputData => {
-        document.getElementById("output-box").innerText = outputData;
+        document.getElementById("output-text").value += outputData;
 	console.log(outputData);
     });
     // After
     installProcess.then(lastData => {
-        document.getElementById("output-box").innerText = lastData;
+        document.getElementById("output-text").value += lastData;
         CommitFunc();
     });
     installProcess.catch(error => {
-        document.getElementById("output-box").innerText = error;
+        document.getElementById("output-text").value += error;
     });
     
 }
 
 function CommitFunc() {
-    commitProcess = cockpit.spawn(["mender", "commit"]);
+    commitProcess = cockpit.spawn(["mender", "commit"], { superuser: "try" });
     commitProcess.stream(outputData => {
-        document.getElementById("output-box").innerText = outputData;
+        document.getElementById("output-text").value += outputData;
     });
     commitProcess.then(lastData => {
-        document.getElementById("output-box").innerText = "Rebooting Now..."
+        document.getElementById("output-text").value += "Rebooting Now..."
         Reboot();
     });
     commitProcess.catch(error => {
-        document.getElementById("output-box").innerText = error;
+        document.getElementById("output-text").value += error;
     });
 }
 
