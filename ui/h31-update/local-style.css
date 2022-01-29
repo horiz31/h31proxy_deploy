@@ -12,8 +12,8 @@
 #output-box {
     width: 700px;
     height:400px;
-    padding: 50px;
-    border: 1px solid #aaaaaa;
+    padding: 0px;
+    border: 5px solid #aaaaaa;
     top: 30%;
     left: 10%;
 }
