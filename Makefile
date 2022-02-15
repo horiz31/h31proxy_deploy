@@ -86,6 +86,7 @@ install: dependencies
 	@$(SUDO) sed -i 's/9090/443/g' /lib/systemd/system/cockpit.socket
 	@$(SUDO) systemctl daemon-reload
 	@$(SUDO) systemctl restart cockpit.socket
+	@$(MAKE) --no-print-directory provision
 
 provision:
 	@$(MAKE) --no-print-directory -B $(SYSCFG)/h31proxy.conf
