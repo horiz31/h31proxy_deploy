@@ -25,7 +25,7 @@ while [[ $# -gt 0 ]]; do
             exit 0
             ;;
         -s)
-            ls /dev/ | grep ttyTH
+            ls /dev/ | grep ttyAM
             exit 0
             ;;
         -i)
