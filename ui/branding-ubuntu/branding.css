@@ -18,13 +18,13 @@ body.login-pf {
 }
 
 #brand:before {
-    content: "PixC4-Jetson";
+    content: "PixC4-Pi";
 }
 
 #index-brand {
-    content: "PixC4-Jetson";
+    content: "PixC4-Pi";
 }
 
 #index-brand:before {
-    content: "PixC4-Jetson";
+    content: "PixC4-Pi";
 }
