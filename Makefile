@@ -65,7 +65,7 @@ install: dependencies
 	@$(SUDO) cp -rf ui/video/* /usr/share/cockpit/video/
 	@$(SUDO) mkdir /usr/share/cockpit/cellular
 	@$(SUDO) cp -rf ui/cellular/* /usr/share/cockpit/cellular/
-	@$(SUDO) cp -rf ui/branding-ubuntu/* /usr/share/cockpit/branding/ubuntu/
+	@$(SUDO) cp -rf ui/branding-ubuntu/* /usr/share/cockpit/branding/debian/
 	@$(SUDO) cp -rf ui/static/* /usr/share/cockpit/static/	
 	@$(SUDO) cp -rf ui/base1/* /usr/share/cockpit/base1/
 	@$(SUDO) apt install nano
@@ -82,7 +82,8 @@ install: dependencies
 	@for s in $(SERVICES) ; do $(SUDO) install -Dm644 $${s%.*}.service $(LIBSYSTEMD)/$${s%.*}.service ; done
 	@if [ ! -z "$(SERVICES)" ] ; then $(SUDO) systemctl daemon-reload ; fi
 	@for s in $(SERVICES) ; do $(SUDO) systemctl enable $${s%.*} ; done
-	@$(SUDO) chown -R h31 /usr/local/h31
+	-@$(SUDO) chown -R h31 /usr/local/h31
+	-@$(SUDO) chown -R pi /usr/local/h31
 	@$(SUDO) sed -i 's/9090/443/g' /lib/systemd/system/cockpit.socket
 	@$(SUDO) systemctl daemon-reload
 	@$(SUDO) systemctl restart cockpit.socket
