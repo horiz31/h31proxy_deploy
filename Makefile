@@ -5,6 +5,9 @@ SN := $(shell hostname)
 SUDO := $(shell test $${EUID} -ne 0 && echo "sudo")
 .EXPORT_ALL_VARIABLES:
 
+# IMPORTANT FOR MENDER!!
+MENDER_MACHINE=jetson-nano-emmc
+
 SERIAL ?= $(shell python3 serial_number.py)
 LOCAL=/usr/local
 LOCAL_SCRIPTS=scripts/start-h31proxy.sh scripts/cockpitScript.sh
@@ -41,6 +44,7 @@ clean:
 
 dependencies:	
 	@if [ ! -z "$(PKGDEPS)" ] ; then $(SUDO) apt-get install -y $(PKGDEPS) ; fi
+	@$(SUDO) ./scripts/get-mender.sh -- --device-type $(MENDER_MACHINE) --server-ip 127.0.0.1 --demo
 
 disable:
 	@( for c in stop disable ; do $(SUDO) systemctl $${c} $(SERVICES) ; done ; true )
@@ -68,6 +72,8 @@ install: dependencies
 	@$(SUDO) cp -rf ui/branding-ubuntu/* /usr/share/cockpit/branding/ubuntu/
 	@$(SUDO) cp -rf ui/static/* /usr/share/cockpit/static/	
 	@$(SUDO) cp -rf ui/base1/* /usr/share/cockpit/base1/
+	@$(SUDO) mkdir -p /usr/share/cockpit/h31-update/
+	@$(SUDO) cp -rf ui/h31-update/* /usr/share/cockpit/h31-update/
 	@$(SUDO) apt install nano
 	@$(SUDO) apt install nload
 	@$(SUDO) apt install htop

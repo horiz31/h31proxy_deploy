@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Horizon 31 Update</title>
+    <meta charset="utf-8">
+    <link href="../base1/bootstrap.min.css" type="text/css" rel="stylesheet">
+    <link href="./local-style.css" type="text/css" rel="stylesheet">
+    <script src="../base1/cockpit.js"></script>
+</head>
+<body>
+    <div class="pf-c-page">
+        <main class="pf-c-page__main" tabindex="-1">
+            <section class="pf-c-page__main-section pf-m-light">
+                <p class="fw-bold fs-2 ms-3 mt-3">H31 Updates</p>
+                <form id="form">
+                    <div id="the-box">
+                        Drop File Here
+                        <input type="file" id="file" class="file_upload" >
+                    </div>
+                </form>
+                <br />
+                <div id="popupBox">
+                    <i class="fas fa-check-circle"></i>
+                    <h2>File Uploading In Progress</h2>
+                    <progress id="fileprogress"></progress>
+                    <br />
+                    <br />
+                </div>
+                <br />
+                <p class="fw-bold fs-2 ms-3 mt-3">Update output</p>
+                <div id="output-box">
+                    <textarea id="outputText"></textarea>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="h31-update.js"></script>
+</body>
+</html>
