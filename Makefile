@@ -44,7 +44,7 @@ clean:
 
 dependencies:	
 	@if [ ! -z "$(PKGDEPS)" ] ; then $(SUDO) apt-get install -y $(PKGDEPS) ; fi
-	@$(SUDO) ./scripts/get-mender.sh -- --device-type $(MENDER_MACHINE) --server-ip 127.0.0.1 --demo
+	@./scripts/ensure-mender.sh
 
 disable:
 	@( for c in stop disable ; do $(SUDO) systemctl $${c} $(SERVICES) ; done ; true )
